@@ -1,0 +1,33 @@
+.upload.back{
+    display: inline;
+    background-color: #FF2114;
+    padding: 10px;
+    width: 100px;
+
+}
+.upload .input{
+    background: #0C15EB;
+    margin-top: 50px;
+    border: 20px solid #ffffff;
+    border-radius: 50px;
+    font-size: 20px;
+    margin-right: 40px;
+    color: #ffffff;
+    padding: 10px
+}
+.upload .upload_button {
+    background: #0C15EB;
+    margin-top: 50px;
+    border: 20px solid #ffffff;
+    border-radius: 50px;
+    font-size: 20px;
+    margin-right: 40px;
+    color: #ffffff;
+    padding: 10px
+}
+ button:hover {
+    opacity: 0.7;
+}
+input:hover {
+    opacity: 0.7;
+}
