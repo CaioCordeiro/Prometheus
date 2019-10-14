@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./styles.css";
 
 
-export default class Login extends Component{
+export default class Func extends Component{
     state ={
         Email: '',
         Senha: '',

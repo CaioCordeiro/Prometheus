@@ -1,5 +1,4 @@
 const express = require('express')
-// const upload = require('./upload')
 const cors = require('cors')
 
 const app = express()

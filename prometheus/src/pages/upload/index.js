@@ -13,12 +13,13 @@ export default class Upload extends Component {
   render() {
     return (
       <div className="upload">
-        <div className="back">
-          <div>
+        <div className="horizonta">
+          <div className="input">
+            <label for="selecao-arquivo">Selecionar um arquivo</label>
             <input
               type="file"
               name="file"
-              className="input"
+              id="selecao-arquivo"
               onChange={this.onChangeHandler}
             />
           </div>
