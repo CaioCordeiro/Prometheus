@@ -3,6 +3,11 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./pages/login";
 import Upload from "./pages/upload";
 import Func from "./pages/func_selec";
+import Amplify from 'aws-amplify';
+import amplify_config from './amplify-config';
+
+Amplify.configure(amplify_config);
+
 class App extends Component {
   render() {
     return (

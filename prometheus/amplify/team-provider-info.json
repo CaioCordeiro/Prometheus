@@ -1,0 +1,14 @@
+{
+    "develop": {
+        "awscloudformation": {
+            "AuthRoleName": "prometheus-develop-20191020210931-authRole",
+            "UnauthRoleArn": "arn:aws:iam::814703463300:role/prometheus-develop-20191020210931-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::814703463300:role/prometheus-develop-20191020210931-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "prometheus-develop-20191020210931-deployment",
+            "UnauthRoleName": "prometheus-develop-20191020210931-unauthRole",
+            "StackName": "prometheus-develop-20191020210931",
+            "StackId": "arn:aws:cloudformation:us-east-2:814703463300:stack/prometheus-develop-20191020210931/084176b0-f397-11e9-abf0-0a3121d24df0"
+        }
+    }
+}
