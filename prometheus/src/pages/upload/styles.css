@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:500,800,300");
+* {
+  margin: 0;
+  outline: 0;
+  border: 0;
+  box-sizing: border-box;
+  height: auto;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300px;
+  font-size: 19px;
+}
+.upload {
+  max-width: 1120px;
+  overflow-x: hidden;
+  background-color: #414141;
+  display: table;   /* Allow the centering to work */
+  margin: auto;
+  width: 100%;
+  border: 3px solid;
+  padding: 30px;
+}
+.upload .input {
+  display: block;
+  width: 100%;
+  border: 0;
+  color: #b2b2b2;
+  background: none;
+  margin-top: 40px;
+}
+input[type="file"] {
+  display: none;
+}
+label {
+  background-color: #3498db;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  margin: 10px;
+  padding: 6px 20px;
+}
+input:hover {
+  opacity: 0.7;
+}
+label:hover {
+    opacity: 0.7;
+  }
+.upload .upload_button {
+  background: #0c15eb;
+  margin-top: 50px;
+  border-radius: 3px;
+  font-size: 20px;
+  margin-right: 40px;
+  color: #ffffff;
+  padding: 10px;
+  flex: 0.5;
+  margin-left:10px;
+}
+button:hover {
+  opacity: 0.7;
+}

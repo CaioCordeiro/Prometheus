@@ -1,0 +1,131 @@
+::-webkit-input-placeholder { /* Chrome */
+    color: #ffffff;
+    opacity: 0.7;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: #ffffff;
+    opacity: 0.7;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color:  #ffffff;
+    opacity: 0.7;
+  }
+  :-moz-placeholder { /* Firefox 4 - 18 */
+    color:  #ffffff;
+    opacity: 0.7;
+  }
+
+.funcs-list {
+    max-width: 700px;
+    margin: 20px auto 0;
+    padding: 0 20px;
+
+}
+img{
+    max-width: 1000px;
+    height: auto;
+}
+
+.funcs-list .top input {
+    outline: 10px;
+    border: 10px solid #715bd4;
+    border-radius: 10px;
+    padding: 1px;
+    color: #ffffff;
+    background: #715bd4;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    
+}
+
+.funcs-list .top button {
+    margin-right: 10px;
+    background: #715bd4;
+    border: 1px solid #715bd4;
+    border-radius: 5px;
+    color: #ffffff;
+}
+
+.funcs-list .top button:hover {
+    opacity: 0.7;
+}
+.funcs-list .top .plus{
+    margin-right: 10px;
+    margin-left: 248px;
+    margin-bottom: 10px;
+    background: #715bd4;
+    border: 10px solid #715bd4;
+    border-radius: 100px;
+    color: #ffffff;
+    font-size: 30px;
+
+}
+.funcs-list img {
+    display: flex;
+    border: 3px solid #715bd4;
+    border-radius: 50px;
+    padding: 50px;
+}
+
+.funcs-list .Upper {
+    /* justify-content: space-between; */
+    display: inline-block;
+}
+
+.funcs-list article {
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.funcs-list article p {
+    font-size: 16px;
+    color: #999;
+    margin-top: 5px;
+    line-height: 24px;
+}
+
+.funcs-list article a {
+    height: 42px;
+    border-radius: 5px;
+    border: 2px solid #715bd4;
+    background: #715bd4;
+    margin-top: 10px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 15px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.funcs-list article a:hover {
+    background: #988dc8;
+    border: 2px solid #988dc8;
+}
+
+.funcs-list .actions {
+
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+}
+
+.funcs-list .actions button {
+    padding: 10px;
+    border-radius: 5px;
+    border: 0;
+    background: #715bd4;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.funcs-list .actions button:hover {
+    opacity: 0.7;
+}

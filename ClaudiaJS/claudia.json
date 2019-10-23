@@ -1,0 +1,11 @@
+{
+  "lambda": {
+    "role": "auth-api-executor",
+    "name": "auth-api",
+    "region": "us-east-2"
+  },
+  "api": {
+    "id": "d518lq900e",
+    "module": "app"
+  }
+}
