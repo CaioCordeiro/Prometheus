@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Auth } from "aws-amplify";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -13,8 +13,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Redirect } from 'react-router-dom'
-
+import { Redirect } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -59,14 +58,11 @@ export default function Login(props) {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [validate, setValidate] = useState(0);
-  // useEffect((validate) => {
-  //   if(validate){
-  //     return <Redirect to='/target' />
-  //   }
-  // });
- function renderRedirect (validate)  {
+
+
+  function renderRedirect(validate) {
     if (validate) {
-      return <Redirect to='/func' />
+      return <Redirect to="/upload" />;
     }
   }
 
@@ -75,11 +71,9 @@ export default function Login(props) {
 
     try {
       const res = await Auth.signIn(user, password);
-      console.log(res)
       alert("Logged in");
-      sessionStorage.setItem('session_id', res.Session);
+      sessionStorage.setItem("session_id", res.Session);
       setValidate(1);
-
     } catch (e) {
       alert(e.message);
     }
@@ -96,7 +90,7 @@ export default function Login(props) {
           Sign in
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
-        {renderRedirect(validate)}
+          {renderRedirect(validate)}
           <TextField
             variant="outlined"
             margin="normal"

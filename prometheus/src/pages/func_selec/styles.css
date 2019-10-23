@@ -60,12 +60,13 @@ img{
     font-size: 30px;
 
 }
-.funcs-list img {
+img {
     display: flex;
     border: 3px solid #715bd4;
-    border-radius: 50px;
-    padding: 50px;
-}
+    /* -webkit-user-select: none;
+    margin: auto; */
+    
+    }
 
 .funcs-list .Upper {
     /* justify-content: space-between; */
