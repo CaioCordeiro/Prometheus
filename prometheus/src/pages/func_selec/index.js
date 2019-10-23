@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import "./styles.css";
 import { Link } from "react-router-dom";
 
+
 export default class Main extends Component {
   state = {
     inputValue: "",
-    funcs: []
+    funcs: [],
+    hasToken:  sessionStorage.getItem('session_id')
   };
   componentDidMount() {
     this.loadfuncs();
@@ -37,35 +39,44 @@ export default class Main extends Component {
     }
   };
 
-  render() {
-    return (
-      <div className="funcs-list">
-        <div className="top">
-          <input
-            value={this.state.inputValue}
-            onChange={evt => this.updateInputValue(evt)}
-            placeholder="Insert search"
-          />
-          <button onClick={() => this.findOnBd(this.state.inputValue)}>
-            Procurar
-          </button>
-          <button onClick={() => this.findOnBd("")}> Back</button>
-          {/* <a className="plus" href="http://localhost:3000/cadastro">
-            +
-          </a> */}
-        </div>
-        {this.state.funcs.map(func => (
-          <article key={func._id}>
-            <div className="Upper">
-              <strong>{func.Name}</strong>
 
-            </div>
-            <p>{func.Email}</p>
-            {/* <Link to={`/notes/${func._id}`}>Notes</Link> */}
-          </article>
-        ))}
-      </div>
-    );
+  render() {
+    if(this.state.hasToken){
+      return (
+        <div className="funcs-list">
+          <div className="top">
+            <input
+              value={this.state.inputValue}
+              onChange={evt => this.updateInputValue(evt)}
+              placeholder="Insert search"
+            />
+            <button onClick={() => this.findOnBd(this.state.inputValue)}>
+              Procurar
+            </button>
+            <button onClick={() => this.findOnBd("")}> Back</button>
+            {/* <a className="plus" href="http://localhost:3000/cadastro">
+              +
+            </a> */}
+          </div>
+          {this.state.funcs.map(func => (
+            <article key={func._id}>
+              <div className="Upper">
+                <strong>{func.Name}</strong>
+  
+              </div>
+              <p>{func.Email}</p>
+              {/* <Link to={`/notes/${func._id}`}>Notes</Link> */}
+            </article>
+          ))}
+        </div>
+      );
+    }
+    else{
+      return(
+        <div>Loga ai mano</div>
+      )
+    }
+    
   }
   updateInputValue(evt) {
     this.setState({
