@@ -11,11 +11,34 @@ def AlvoDecil(data, casasDecimais):
     tratado = df.loc[:,['ALVO']]
     label = ["0-10","10-20","20-30","30-40","40-50","50-60","60-70","70-80","80-90","90-100"]
     tratado.ALVO = tratado.ALVO.apply(lambda x: round(x, casasDecimais))
-    fig = px.line(x=tratado.ALVO, y=label, title='Decil Alvo')
+    fig = go.Figure()
+    
+    #Add bar chart
+    fig.add_trace(
+        go.Bar(x=label, y=tratado.ALVO, name="Bar")
+    )
+
+    #Add line chart
+    fig.add_trace(
+        go.Scatter(x=label, y=tratado.ALVO, name="Line")
+    )
+
+    #Add títulos
+    fig.update_layout(
+        title= {
+            'text': "Percentual de Maus Pagadores por Décil de Score",
+            'y':0.9,
+            'x':0.5,
+            'xanchor': 'center',
+            'yanchor': 'top'
+        },
+        xaxis_title = "Décil de Score",
+        yaxis_title = "Percentual de Maus Pagadores"
+    )
+
     fig.show()
-    print(tratado)
-    #print(data.groupby(pd.qcut(data.SCORE, 10)).to_string())
-    return
+
+    return fig
 
 def main():
     file = "./BASE_CREDITO.txt";
