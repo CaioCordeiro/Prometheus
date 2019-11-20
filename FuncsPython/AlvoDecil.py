@@ -32,7 +32,7 @@ def AlvoDecil(data, casasDecimais):
             'xanchor': 'center',
             'yanchor': 'top'
         },
-        xaxis_title = "Décil de Score",
+        xaxis_title = "Faixa de Score",
         yaxis_title = "Percentual de Maus Pagadores"
     )
 
