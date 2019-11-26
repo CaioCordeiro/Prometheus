@@ -34,7 +34,31 @@ def Ks2(data):
     # Label
     label = ["0-10","10-20","20-30","30-40","40-50","50-60","60-70","70-80","80-90","90-100"]
 
-    fig = go.Figure()
+        # Texto da Tabela descrevendo gráfico
+    desc = "Lorem Ipsum"
+
+    #fig = go.Figure()
+
+    # Fazendo os subplots para colocar a descrição e o gráfico na mesma imagem
+    fig = make_subplots(
+    rows=1, cols=3,
+    specs= [[{"type": "table"},{"colspan": 2},None]]
+    )
+
+    # Add Table
+    fig.add_trace(
+    go.Table(
+        header=dict(
+            values=["Descrição"],
+            font=dict(size=10),
+            align="left"
+        ),
+        cells=dict(
+            values=[desc],
+            align = "left")
+    ),
+    row=1, col=1
+    )
     
     # Add linha de Bom
     fig.add_trace(
@@ -43,13 +67,17 @@ def Ks2(data):
 
     # Add linha de Mal
     fig.add_trace(
-        go.Scatter(x=label, y=df.PercentualMalAcc, name="Mal")
+        go.Scatter(x=label, y=df.PercentualMalAcc, name="Mal"), row=1, col=2
     )
 
     # Add linha de KS2
     fig.add_trace(
-        go.Scatter(x=label, y=df.KS2, name="KS2")
+        go.Scatter(x=label, y=df.KS2, name="KS2"), row=1, col=2
     )
+
+    fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
+    fig.update_yaxes(title_text="% População (AC)", row=1, col=2)
+    fig.update_yaxes(tickformat=".3%", row=1, col=2)
 
     #Add Formatação do Gráfico
     fig.update_layout(
@@ -60,9 +88,6 @@ def Ks2(data):
             'xanchor': 'center',
             'yanchor': 'top'
         },
-        xaxis_title = "Faixa de Score",
-        yaxis_title = "% População (AC)",
-        yaxis = dict(tickformat=".3%")
     )
 
     fig.show()
