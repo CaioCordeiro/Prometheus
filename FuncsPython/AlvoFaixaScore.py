@@ -42,16 +42,16 @@ def AlvoFaixaScore(data, casasDecimais):
 
     #Add bar chart
     fig.add_trace(
-        go.Bar(x=label, y=tratado2.ALVO, name="Bar"), row=1, col=2
+        go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO, hovertemplate = "Total de pessoa na faixa: %{customdata}", name="Contagem"), row=1, col=2
     )
 
     #Add line chart
     fig.add_trace(
-        go.Scatter(x=label, y=(tratado.ALVO*tratado2.ALVO), name="Line"), row=1, col=2
+        go.Scatter(x=label, y=(tratado.ALVO*tratado2.ALVO), customdata= tratado.ALVO, hovertemplate = "Percentual de maus Pagadores %{customdata}", name="Percentual de Maus Pagadores"), row=1, col=2
     )
 
     fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
-    fig.update_yaxes(title_text="Percentual de Maus Pagadores", row=1, col=2)
+    fig.update_yaxes(title_text="Contagem de Pessoas", row=1, col=2)
 
     #Add títulos
     fig.update_layout(
