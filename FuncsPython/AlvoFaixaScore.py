@@ -6,8 +6,11 @@ from plotly.subplots import make_subplots
 
 def AlvoFaixaScore(data, casasDecimais):
     bin = [0,10,20,30,40,50,60,70,80,90,100]
+
     df = data.groupby(pd.cut(data.SCORE, bins = bin)).mean()
+    df2 = data.groupby(pd.cut(data.SCORE, bins = bin)).count()
     tratado = df.loc[:,['ALVO']]
+    tratado2 = df2.loc[:,['ALVO']]
     label = ["0-10","10-20","20-30","30-40","40-50","50-60","60-70","70-80","80-90","90-100"]
     tratado.ALVO = tratado.ALVO.apply(lambda x: round(x, casasDecimais))
 
@@ -39,12 +42,12 @@ def AlvoFaixaScore(data, casasDecimais):
 
     #Add bar chart
     fig.add_trace(
-        go.Bar(x=label, y=tratado.ALVO, name="Bar"), row=1, col=2
+        go.Bar(x=label, y=tratado2.ALVO, name="Bar"), row=1, col=2
     )
 
     #Add line chart
     fig.add_trace(
-        go.Scatter(x=label, y=tratado.ALVO, name="Line"), row=1, col=2
+        go.Scatter(x=label, y=(tratado.ALVO*tratado2.ALVO), name="Line"), row=1, col=2
     )
 
     fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
