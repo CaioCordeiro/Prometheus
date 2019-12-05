@@ -4,23 +4,26 @@ import math
 import plotly.graph_objects as go 
 from plotly.subplots import make_subplots
 
-def AlvoFaixaScore(data, casasDecimais, flag):
-    bin = [0,10,20,30,40,50,60,70,80,90,100]
+def PiramideEtaria(data, flag):
+    bin = [10,20,30,40,50,float("inf")]
 
-    df = data.groupby(pd.cut(data.SCORE, bins = bin)).mean()
-    df2 = data.groupby(pd.cut(data.SCORE, bins = bin)).count()
-    tratado = df.loc[:,['ALVO']]
-    tratado2 = df2.loc[:,['ALVO']]
-    label = ["0-10","10-20","20-30","30-40","40-50","50-60","60-70","70-80","80-90","90-100"]
-    tratado.ALVO = tratado.ALVO.apply(lambda x: round(x, casasDecimais))
+
+    df = data.groupby([data.SEXO,pd.cut(data.IDADE, bins = bin)]).count()
+    tratado = df.loc[:,['IDADE']]
+    tratado.IDADE = tratado.IDADE / tratado.IDADE.groupby(level=0).sum()
+    label = ["10-20","20-30","30-40","40-50",">50"]
+
+    #print(tratado.groupby('SEXO').get_group("F"))
+    y = list(range(0, 100, 10))
 
     flag = flag.strip().lower()
 
     if flag == "no":
 
         # Texto da Tabela descrevendo gráfico
-        desc = "A taxa de maus pagadores diminui consideravelmente à medida que a faixa de score aumenta, indicando <b>clientes mais confiáveis</b> nestas áreas."
-
+        desc = "Lorem Ipsum"
+        
+        
         #fig = go.Figure()
 
         # Fazendo os subplots para colocar a descrição e o gráfico na mesma imagem
@@ -44,14 +47,27 @@ def AlvoFaixaScore(data, casasDecimais, flag):
         row=1, col=1
         )
 
-        #Add bar chart
+        #Add chart
         fig.add_trace(
-            go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO, hovertemplate = "Total de pessoa na faixa: %{customdata}", name="Contagem"), row=1, col=2
+           go.Bar(y=y,
+               x= tratado.groupby('SEXO').get_group("M").IDADE,
+               orientation='h',
+               name='Masculino',
+               hoverinfo='x',
+               marker=dict(color='powderblue')
+               ), row=1, col=2
         )
 
         #Add line chart
         fig.add_trace(
-            go.Scatter(x=label, y=(tratado.ALVO*tratado2.ALVO), customdata= tratado.ALVO, hovertemplate = "Percentual de maus Pagadores %{customdata}", name="Percentual de Maus Pagadores"), row=1, col=2
+             go.Bar(y=y,
+               x= -1 * tratado.groupby('SEXO').get_group("F").IDADE,
+               orientation='h',
+               name='Feminino',
+               text= -1 * tratado.groupby('SEXO').get_group("F").IDADE,
+               hoverinfo='text',
+               marker=dict(color='seagreen')
+               ), row=1, col=2
         )
 
         fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
@@ -80,8 +96,8 @@ def AlvoFaixaScore(data, casasDecimais, flag):
 
         #Add bar chart
         pre_fig.add_trace(
-            go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO, hovertemplate = "Total de pessoa na faixa: %{customdata}", name="Contagem"), row=1, col=1
-        )
+            go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO, hovertemplate = "Total de pessoa na faixa: %{customdata}", name=""), row=1, col=1
+        )Contagem
 
         #Add line chart
         pre_fig.add_trace(
@@ -104,7 +120,6 @@ def AlvoFaixaScore(data, casasDecimais, flag):
 
         pre_fig.show()
 
-        Titulo = str(input("Tipo da Descrição: "))
         desc = str(input("digite a descrição desejada: "))
 
         # Fazendo os subplots para colocar a descrição e o gráfico na mesma imagem
@@ -117,7 +132,7 @@ def AlvoFaixaScore(data, casasDecimais, flag):
         fig.add_trace(
         go.Table(
             header=dict(
-                values=[Titulo],
+                values=["Descrição"],
                 font=dict(size=10),
                 align="left"
             ),
@@ -130,7 +145,7 @@ def AlvoFaixaScore(data, casasDecimais, flag):
 
         #Add bar chart
         fig.add_trace(
-            go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO, hovertemplate = "Total de pessoa na faixa: %{customdata}", name="Contagem"), row=1, col=2
+            go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO, hovertemplate = "Total de pessoa na faixa: %{customdata}", name="Pessoas na Faixa"), row=1, col=2
         )
 
         #Add line chart
@@ -159,7 +174,7 @@ def AlvoFaixaScore(data, casasDecimais, flag):
 def main():
     file = "./BASE_CREDITO.txt";
     dataframe = pd.read_csv(file, delimiter= '\t')
-    AlvoFaixaScore(dataframe, 3,"yes")
+    PiramideEtaria(dataframe, "no")
 
 if __name__ == '__main__':
     main()
