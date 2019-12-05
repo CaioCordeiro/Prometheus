@@ -1,0 +1,147 @@
+#Aluno: Caio Cordeiro
+
+
+#Questão 1
+
+sum <- 0
+for(i in 1:20){
+  for(j in 1:10){
+    for(k in 1:5){
+      sum<-sum+((i**3*j**2)/(4+k))
+    }
+  }
+}
+
+#Questão 2
+#Original
+def tempfn3(x,n,aux){
+  for(i in 1:n){
+    if(i==1){
+      sum<-1+x/1
+    }else{
+      sum<-sum+(x**i)/i
+    }
+  }
+  return(sum)
+}
+
+#Corrigida
+tempfn3 <- function(x,n ){
+  sum<- 0
+  for(i in 1:n){
+    if(i==1){
+      sum<- 1+ x/1
+    }else{
+      sum<- sum + ((x**i)/i)
+    }
+    
+  }
+  return(sum)
+}
+a<- tempfn3(2,2)
+
+
+#Questão 3
+#Original
+def fatprimo(n){
+  res<-c()
+  point<-1
+  flag<-0
+  for(i in 2:n){
+    for(k in 2:i){
+      if(i%%k==0){
+        flag<-1
+      }
+    }
+    if(flag<-0){
+      if(n%%i==0){
+        n<-n/i
+        res[point]<-i
+        point<- point+1
+      }
+    }
+    flag<-0
+  }
+  return(res)
+}
+
+#Corrigida
+fatprimo <- function(n){
+  res<- c()
+  point<-1
+  i<-2
+  isprim<- 0
+  while(i<=n){
+    for (k in 2:i+1){
+      if(i==2){
+        break
+      }
+      if(i%%k==0 & i!=k){
+        isprim<-1
+      }
+    }
+    if(isprim==0 & n%%i==0){
+      n<-n/i
+      res[point]<-i
+      point <- point+1
+    }else{
+      i<-i+1
+    }
+    isprim<-0
+  }
+  return(res)
+}
+a <- fatprimo(57)
+
+#Questão 4
+#Original
+def collatz(){
+  end<-0
+  i<-2
+  res<-c(x)
+  while(end!=1){
+    if((x%%2)==0){
+      x<-x/2
+    }else{
+      x<-3*x+1
+    }
+    res[i]<-x
+    i<i+1
+    if(x==1){
+      end<-1
+    }
+  }
+  return(res)
+}
+#Corrigida
+collatz <- function(x){
+  end<- 0
+  i<-2
+  res<-c(x)
+  while(end!=1){
+    if(x%%2==0){
+      x<-x/2
+    }else{
+      x<-3*x+1
+    }
+    res[i]<-x
+    i<- i+1
+    if(x==1){
+      end<-1
+    }
+  }
+  return(res)
+}
+
+a<-collatz(12)
+#Questão 5
+#Original
+A<-cbind(c(1,1))
+A<- crow(c(1,-1))
+B<- crow(c(7,1))
+X<-(A**-1)*B
+#Corrigida
+A <- matrix( c(1, 1, 1, -1),nrow=2,ncol=2,byrow = TRUE)
+B<-rbind(c(7,1))
+a <-solve(t(A)%*%A)
+X<-B%*%a

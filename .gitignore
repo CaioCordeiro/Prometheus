@@ -98,3 +98,9 @@ typings/
 # End of https://www.gitignore.io/api/node
 node_modules/node_modules/
 node_modules/
+
+# arquivos
+FuncsPython/BASE_CREDITO.txt
+FuncsPython/BASE_CREDITO_DESC.txt
+FuncsPython/Planilha_Validacao.xlsx
+FuncsPython/davaviz.py
