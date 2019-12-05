@@ -68,12 +68,12 @@ def Ks2(data,flag):
         
         # Add linha de Bom
         fig.add_trace(
-            go.Scatter(x=label, y=df.PercentualBomAcc, name="Bom")
+            go.Scatter(x=label, y=df.PercentualBomAcc, hovertemplate = "%{x},%{y}", name="Bom" )
         )
 
         # Add linha de Mal
         fig.add_trace(
-            go.Scatter(x=label, y=df.PercentualMalAcc, name="Mal"), row=1, col=2
+            go.Scatter(x=label, y=df.PercentualMalAcc,hovertemplate= "%{x},%{y}", name="Mal"), row=1, col=2
         )
 
         # Add linha de KS2
@@ -110,12 +110,12 @@ def Ks2(data,flag):
         
         # Add linha de Bom
         pre_fig.add_trace(
-            go.Scatter(x=label, y=df.PercentualBomAcc, name="Bom")
+            go.Scatter(x=label, y=df.PercentualBomAcc, hovertemplate= "%{x},%{y}", name="Bom")
         )
 
         # Add linha de Mal
         pre_fig.add_trace(
-            go.Scatter(x=label, y=df.PercentualMalAcc, name="Mal"), row=1, col=1
+            go.Scatter(x=label, y=df.PercentualMalAcc, hovertemplate= "%{x},%{y}", name="Mal"), row=1, col=1
         )
 
         # Add linha de KS2
@@ -165,12 +165,12 @@ def Ks2(data,flag):
         
         # Add linha de Bom
         fig.add_trace(
-            go.Scatter(x=label, y=df.PercentualBomAcc, name="Bom")
+            go.Scatter(x=label, y=df.PercentualBomAcc, hovertemplate="%{x},%{y}" , name="Bom")
         )
 
         # Add linha de Mal
         fig.add_trace(
-            go.Scatter(x=label, y=df.PercentualMalAcc, name="Mal"), row=1, col=2
+            go.Scatter(x=label, y=df.PercentualMalAcc, hovertemplate="%{x},%{y}", name="Mal"), row=1, col=2
         )
 
         # Add linha de KS2
@@ -198,13 +198,13 @@ def Ks2(data,flag):
         return fig
     
     else:
-        raise "Flag invalida, por favor digite yes ou no"
+        raise " Flag invalida, por favor digite 'YES' ou 'NO' "
         
 
 def main():
     file = "./BASE_CREDITO.txt";
     dataframe = pd.read_csv(file, delimiter= '\t')
-    Ks2(dataframe,"limão")
+    Ks2(dataframe,"Yes")
 
 if __name__ == '__main__':
     main()
