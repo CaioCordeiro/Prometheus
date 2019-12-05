@@ -36,6 +36,7 @@ def Ks2(data,flag):
 
 
     flag = flag.strip().lower()
+
     if flag == "no":
 
         # Texto da Tabela descrevendo gráfico
@@ -99,7 +100,7 @@ def Ks2(data,flag):
 
         return fig
     
-    else:
+    elif flag == "yes":
                 
 
         pre_fig= make_subplots(
@@ -195,12 +196,15 @@ def Ks2(data,flag):
         fig.show()
 
         return fig
+    
+    else:
+        raise "Flag invalida, por favor digite yes ou no"
         
 
 def main():
     file = "./BASE_CREDITO.txt";
     dataframe = pd.read_csv(file, delimiter= '\t')
-    Ks2(dataframe,"yes")
+    Ks2(dataframe,"limão")
 
 if __name__ == '__main__':
     main()
