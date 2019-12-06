@@ -130,7 +130,7 @@ def AlvoFaixaScore(data, casasDecimais, flag):
 
         #Add bar chart
         fig.add_trace(
-            go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO, hovertemplate = "Total de pessoa na faixa: %{customdata}", name="Contagem"), row=1, col=2
+            go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO, hovertemplate = "Total de pessoa na faixa: %{customdata}", name="Quantidade"), row=1, col=2
         )
 
         #Add line chart

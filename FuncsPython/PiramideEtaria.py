@@ -81,7 +81,8 @@ def PiramideEtaria(data, flag):
                 'x':0.5,
                 'xanchor': 'center',
                 'yanchor': 'top'
-            }
+            },
+            barmode = 'overlay'
         )
 
         fig.show()
@@ -97,7 +98,7 @@ def PiramideEtaria(data, flag):
         #Add bar chart
         pre_fig.add_trace(
             go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO, hovertemplate = "Total de pessoa na faixa: %{customdata}", name=""), row=1, col=1
-        )Contagem
+        )
 
         #Add line chart
         pre_fig.add_trace(
@@ -163,9 +164,11 @@ def PiramideEtaria(data, flag):
                 'y':0.9,
                 'x':0.5,
                 'xanchor': 'center',
-                'yanchor': 'top'
+                'yanchor': 'top',
             }
         )
+
+        fig['layout'].update(barmode = 'overlay')
 
         fig.show()
 
