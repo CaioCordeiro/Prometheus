@@ -99,6 +99,9 @@ typings/
 node_modules/node_modules/
 node_modules/
 
+#vscode
+.vscode
+
 # arquivos
 FuncsPython/BASE_CREDITO.txt
 FuncsPython/BASE_CREDITO_DESC.txt
