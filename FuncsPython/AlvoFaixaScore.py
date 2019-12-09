@@ -6,6 +6,7 @@ from plotly.subplots import make_subplots
 
 def AlvoFaixaScore(data, casasDecimais, flag):
     bin = [0,10,20,30,40,50,60,70,80,90,100]
+    colors=["rgba(0, 33, 64,1)", "rgba(206, 21, 67,1)"]
 
     df = data.groupby(pd.cut(data.SCORE, bins = bin)).mean()
     df2 = data.groupby(pd.cut(data.SCORE, bins = bin)).count()
@@ -46,12 +47,16 @@ def AlvoFaixaScore(data, casasDecimais, flag):
 
         #Add bar chart
         fig.add_trace(
-            go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO, hovertemplate = "Total de pessoa na faixa: %{customdata}", name="Contagem"), row=1, col=2
+            go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO,
+            hovertemplate = "Total de pessoa na faixa: %{customdata}",
+            marker_color=colors[0], name="Contagem"), row=1, col=2
         )
 
         #Add line chart
         fig.add_trace(
-            go.Scatter(x=label, y=(tratado.ALVO*tratado2.ALVO), customdata= tratado.ALVO, hovertemplate = "Percentual de maus Pagadores %{customdata}", name="Percentual de Maus Pagadores"), row=1, col=2
+            go.Scatter(x=label, y=(tratado.ALVO*tratado2.ALVO),
+            customdata= tratado.ALVO, hovertemplate = "Percentual de maus Pagadores %{customdata}",
+            marker_color=colors[1], name="Percentual de Maus Pagadores"), row=1, col=2
         )
 
         fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
@@ -70,6 +75,8 @@ def AlvoFaixaScore(data, casasDecimais, flag):
 
         fig.show()
 
+        return fig
+
     if flag == "yes":
 
         # Fazendo os subplots para colocar a descrição e o gráfico na mesma imagem
@@ -80,12 +87,16 @@ def AlvoFaixaScore(data, casasDecimais, flag):
 
         #Add bar chart
         pre_fig.add_trace(
-            go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO, hovertemplate = "Total de pessoa na faixa: %{customdata}", name="Contagem"), row=1, col=1
+            go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO, 
+            hovertemplate = "Total de pessoa na faixa: %{customdata}", 
+            marker_color=colors[0], name="Contagem"), row=1, col=1
         )
 
         #Add line chart
         pre_fig.add_trace(
-            go.Scatter(x=label, y=(tratado.ALVO*tratado2.ALVO), customdata= tratado.ALVO, hovertemplate = "Percentual de maus Pagadores %{customdata}", name="Percentual de Maus Pagadores"), row=1, col=1
+            go.Scatter(x=label, y=(tratado.ALVO*tratado2.ALVO), 
+            customdata= tratado.ALVO, hovertemplate = "Percentual de maus Pagadores %{customdata}",
+            marker_color=colors[1], name="Percentual de Maus Pagadores"), row=1, col=1
         )
 
         pre_fig.update_xaxes(title_text="Faixa de Score", row=1, col=1)
@@ -130,12 +141,16 @@ def AlvoFaixaScore(data, casasDecimais, flag):
 
         #Add bar chart
         fig.add_trace(
-            go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO, hovertemplate = "Total de pessoa na faixa: %{customdata}", name="Quantidade"), row=1, col=2
+            go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO,
+            hovertemplate = "Total de pessoa na faixa: %{customdata}",
+            marker_color=colors[0], name="Quantidade"), row=1, col=2
         )
 
         #Add line chart
         fig.add_trace(
-            go.Scatter(x=label, y=(tratado.ALVO*tratado2.ALVO), customdata= tratado.ALVO, hovertemplate = "Percentual de maus Pagadores %{customdata}", name="Percentual de Maus Pagadores"), row=1, col=2
+            go.Scatter(x=label, y=(tratado.ALVO*tratado2.ALVO), 
+            customdata= tratado.ALVO, hovertemplate = "Percentual de maus Pagadores %{customdata}",
+            marker_color=colors[1], name="Percentual de Maus Pagadores"), row=1, col=2
         )
 
         fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
@@ -154,12 +169,15 @@ def AlvoFaixaScore(data, casasDecimais, flag):
 
         fig.show()
 
-    return fig
+        return fig
+
+    else:
+        raise "Flag invalida, por favor digite yes ou no"
 
 def main():
-    file = "./BASE_CREDITO.txt";
+    file = "./BASE_CREDITO.txt"
     dataframe = pd.read_csv(file, delimiter= '\t')
-    AlvoFaixaScore(dataframe, 3,"yes")
+    AlvoFaixaScore(dataframe, 3,"no")
 
 if __name__ == '__main__':
     main()

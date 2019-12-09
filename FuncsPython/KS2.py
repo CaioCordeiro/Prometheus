@@ -6,6 +6,9 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 def Ks2(data,flag):
+    # Cores pro gráfico
+    colors = ["rgb(0, 33, 64)", "rgb(206, 21, 67)", "rgb(212, 175, 55)"]
+
     # Bin que vai permitir agrupar os valores por score
     bin = [0,10,20,30,40,50,60,70,80,90,100]
 
@@ -68,17 +71,17 @@ def Ks2(data,flag):
         
         # Add linha de Bom
         fig.add_trace(
-            go.Scatter(x=label, y=df.PercentualBomAcc, name="Bom")
+            go.Scatter(x=label, y=df.PercentualBomAcc, name="Bom", marker_color=colors[0]), row=1,col=2
         )
 
         # Add linha de Mal
         fig.add_trace(
-            go.Scatter(x=label, y=df.PercentualMalAcc, name="Mal"), row=1, col=2
+            go.Scatter(x=label, y=df.PercentualMalAcc, name="Mal", marker_color=colors[1]), row=1, col=2
         )
 
         # Add linha de KS2
         fig.add_trace(
-            go.Scatter(x=label, y=df.KS2, name="KS2"), row=1, col=2
+            go.Scatter(x=label, y=df.KS2, name="KS2", marker_color=colors[2]), row=1, col=2
         )
 
         fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
@@ -110,17 +113,17 @@ def Ks2(data,flag):
         
         # Add linha de Bom
         pre_fig.add_trace(
-            go.Scatter(x=label, y=df.PercentualBomAcc, name="Bom")
+            go.Scatter(x=label, y=df.PercentualBomAcc, name="Bom", marker_color=colors[0]), row=1,col=1
         )
 
         # Add linha de Mal
         pre_fig.add_trace(
-            go.Scatter(x=label, y=df.PercentualMalAcc, name="Mal"), row=1, col=1
+            go.Scatter(x=label, y=df.PercentualMalAcc, name="Mal", marker_color=colors[1]), row=1, col=1
         )
 
         # Add linha de KS2
         pre_fig.add_trace(
-            go.Scatter(x=label, y=df.KS2, name="KS2"), row=1, col=1
+            go.Scatter(x=label, y=df.KS2, name="KS2", marker_color=colors[2]), row=1, col=1
         )
 
         pre_fig.update_xaxes(title_text="Faixa de Score", row=1, col=1)
@@ -140,6 +143,7 @@ def Ks2(data,flag):
 
         pre_fig.show()
 
+        Titulo = str(input("Tipo da Descrição: "))
         desc = str(input("digite a descrição desejada: "))
 
         # Fazendo os subplots para colocar a descrição e o gráfico na mesma imagem
@@ -152,7 +156,7 @@ def Ks2(data,flag):
         fig.add_trace(
         go.Table(
             header=dict(
-                values=["Descrição"],
+                values=[Titulo],
                 font=dict(size=10),
                 align="left"
             ),
@@ -165,17 +169,17 @@ def Ks2(data,flag):
         
         # Add linha de Bom
         fig.add_trace(
-            go.Scatter(x=label, y=df.PercentualBomAcc, name="Bom")
+            go.Scatter(x=label, y=df.PercentualBomAcc, name="Bom", marker_color=colors[0]), row=1,col=2
         )
 
         # Add linha de Mal
         fig.add_trace(
-            go.Scatter(x=label, y=df.PercentualMalAcc, name="Mal"), row=1, col=2
+            go.Scatter(x=label, y=df.PercentualMalAcc, name="Mal", marker_color=colors[1]), row=1, col=2
         )
 
         # Add linha de KS2
         fig.add_trace(
-            go.Scatter(x=label, y=df.KS2, name="KS2"), row=1, col=2
+            go.Scatter(x=label, y=df.KS2, name="KS2", marker_color=colors[2]), row=1, col=2
         )
 
         fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
@@ -204,7 +208,7 @@ def Ks2(data,flag):
 def main():
     file = "./BASE_CREDITO.txt";
     dataframe = pd.read_csv(file, delimiter= '\t')
-    Ks2(dataframe,"limão")
+    Ks2(dataframe,"yes")
 
 if __name__ == '__main__':
     main()
