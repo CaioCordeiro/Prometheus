@@ -40,7 +40,9 @@ def Ks2(data,flag):
     if flag == "no":
 
         # Texto da Tabela descrevendo gráfico
-        desc = "Lorem Ipsum"
+        desc = """O KS2 é uma métrica utilizada para sabermos quanto o modelo discrimina os bons dos maus clientes. 
+            Seu valor é a maior diferença das distribuições acumuladas dos dois públicos analisados. 
+            Quanto maior o KS2, melhor será a discriminação dos dois públicos pelo modelo em análise."""
         
 
         #fig = go.Figure()
@@ -204,7 +206,7 @@ def Ks2(data,flag):
 def main():
     file = "./BASE_CREDITO.txt";
     dataframe = pd.read_csv(file, delimiter= '\t')
-    Ks2(dataframe,"Yes")
+    Ks2(dataframe,"NO")
 
 if __name__ == '__main__':
     main()
