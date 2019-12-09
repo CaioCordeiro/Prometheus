@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import math
+#import plotly.io as pio
 import plotly.graph_objects as go 
 from plotly.subplots import make_subplots
 
@@ -43,6 +44,7 @@ def PiramideEtaria(data, flag):
             ),
             cells=dict(
                 values=[desc],
+                font=dict(size=10),
                 align = "left")
         ),
         row=1, col=1
@@ -339,7 +341,13 @@ def PiramideEtaria(data, flag):
 def main():
     file = "./BASE_CREDITO.txt"
     dataframe = pd.read_csv(file, delimiter= '\t')
-    PiramideEtaria(dataframe, "no")
+    html = PiramideEtaria(dataframe, "no")
+
+    # text = pio.to_html(html)
+
+    # file1 = open("PiramideEtaria.txt","a")
+    # file1.write(text)
+    # file1.close() 
 
 if __name__ == '__main__':
     main()
