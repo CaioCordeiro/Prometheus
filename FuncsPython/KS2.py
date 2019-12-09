@@ -208,7 +208,7 @@ def Ks2(data,flag):
 def main():
     file = "./BASE_CREDITO.txt";
     dataframe = pd.read_csv(file, delimiter= '\t')
-    Ks2(dataframe,"yes")
+    Ks2(dataframe,"no")
 
 if __name__ == '__main__':
     main()

@@ -115,8 +115,12 @@ def AlvoFaixaScore(data, casasDecimais, flag):
 
         pre_fig.show()
 
+        # Texto da Tabela descrevendo gráfico
+        desc = "A taxa de maus pagadores diminui consideravelmente à medida que a faixa de score aumenta, indicando <b>clientes mais confiáveis</b> nestas áreas."
+
+
         Titulo = str(input("Tipo da Descrição: "))
-        desc = str(input("digite a descrição desejada: "))
+        analise = str(input("digite a descrição desejada: "))
 
         # Fazendo os subplots para colocar a descrição e o gráfico na mesma imagem
         fig = make_subplots(
@@ -133,7 +137,7 @@ def AlvoFaixaScore(data, casasDecimais, flag):
                 align="left"
             ),
             cells=dict(
-                values=[desc],
+                values=[[desc,analise]],
                 align = "left")
         ),
         row=1, col=1
@@ -177,7 +181,7 @@ def AlvoFaixaScore(data, casasDecimais, flag):
 def main():
     file = "./BASE_CREDITO.txt"
     dataframe = pd.read_csv(file, delimiter= '\t')
-    AlvoFaixaScore(dataframe, 3,"no")
+    AlvoFaixaScore(dataframe, 3,"yes")
 
 if __name__ == '__main__':
     main()

@@ -120,7 +120,7 @@ def PiramideEtaria(data, flag):
         #Add títulos
         fig.update_layout(
             title= {
-                'text': "Contagem de Pessoas por Faixa Etária e Sexo",
+                'text': "Pirâmide Etária",
                 'y':0.9,
                 'x':0.5,
                 'xanchor': 'center',
@@ -213,7 +213,7 @@ def PiramideEtaria(data, flag):
         #Add títulos
         pre_fig.update_layout(
             title= {
-                'text': "Contagem de Pessoas por Faixa Etária e Sexo",
+                'text': "Pirâmide Etária",
                 'y':0.9,
                 'x':0.5,
                 'xanchor': 'center',
@@ -320,7 +320,7 @@ def PiramideEtaria(data, flag):
         #Add títulos
         fig.update_layout(
             title= {
-                'text': "Contagem de Pessoas por Faixa Etária e Sexo",
+                'text': "Pirâmide Etária",
                 'y':0.9,
                 'x':0.5,
                 'xanchor': 'center',
@@ -339,7 +339,7 @@ def PiramideEtaria(data, flag):
 def main():
     file = "./BASE_CREDITO.txt"
     dataframe = pd.read_csv(file, delimiter= '\t')
-    PiramideEtaria(dataframe, "yes")
+    PiramideEtaria(dataframe, "no")
 
 if __name__ == '__main__':
     main()
