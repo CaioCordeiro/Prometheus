@@ -49,7 +49,7 @@ def AlvoFaixaScore(data, casasDecimais, flag):
         fig.add_trace(
             go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO,
             hovertemplate = "Total de pessoa na faixa: %{customdata}",
-            marker_color=colors[0], name="Contagem"), row=1, col=2
+            marker_color=colors[0], name="Quantidade"), row=1, col=2
         )
 
         #Add line chart
