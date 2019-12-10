@@ -119,6 +119,7 @@ def Ks2(data,flag):
         )
 
         # Add linha de Mal
+        pre_fig.add_trace(
             go.Scatter(x=label, y=df.PercentualMalAcc, name="Mal", hovertemplate= "%{x},%{y}", marker_color=colors[1]), row=1, col=1
         )
 
