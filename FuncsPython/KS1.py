@@ -8,7 +8,7 @@ def KS1(data, flag):
     colors=["rgba(0, 33, 64,1)", "rgba(206, 21, 67,1)"]
 
     # Texto da Tabela descrevendo gráfico
-    desc = "Quanto menor o KS1, melhor. O padrão é considerar a população aderente quanto o KS1 for inferior a 100%"
+    static_desc = "Quanto menor o KS1, melhor. O padrão é considerar a população aderente quanto o KS1 for inferior a 100%"
 
 
     flag = flag.strip().lower()
@@ -30,7 +30,7 @@ def KS1(data, flag):
                 align="left"
             ),
             cells=dict(
-                values=[desc],
+                values=[static_desc],
                 align = "left")
         ),
         row=1, col=1
@@ -107,67 +107,249 @@ def KS1(data, flag):
         pre_fig.show()
 
         # Texto da Tabela descrevendo gráfico
-        desc = "A taxa de maus pagadores diminui consideravelmente à medida que a faixa de score aumenta, indicando <b>clientes mais confiáveis</b> nestas áreas."
+        static_desc = "A taxa de maus pagadores diminui consideravelmente à medida que a faixa de score aumenta, indicando <b>clientes mais confiáveis</b> nestas áreas."
 
 
-        Titulo = str(input("Tipo da Descrição: "))
+        Titulo = str(input("Tipo da Descrição [1 - Oportunidade], [2 - Alerta], [3 - Risco]: "))
         analise = str(input("digite a descrição desejada: "))
 
         # Fazendo os subplots para colocar a descrição e o gráfico na mesma imagem
-        fig = make_subplots(
-        rows=1, cols=3,
-        specs= [[{"type": "table"},{"colspan": 2},None]]
-        )
+        if Titulo == "1":
+            Titulo = "Oportunidade"
+            fig = make_subplots(
+            rows=1, cols=3,
+            specs= [[{"type": "table"},{"colspan": 2},None]]
+            )
 
-        # Add Table
-        fig.add_trace(
-        go.Table(
-            header=dict(
-                values=[Titulo],
-                font=dict(size=10),
-                align="left"
+            # Add Table
+            fig.add_trace(                   
+            go.Table(
+                header=dict(
+                    values=["Descrição do Gráfico"],
+                    font=dict(size=12),
+                    align="left"
+                ),
+                cells=dict(
+                    values=[static_desc],
+                    line_color='darkslategray',
+                    align = "left")
             ),
-            cells=dict(
-                values=[[desc,analise]],
-                align = "left")
-        ),
-        row=1, col=1
-        )
+            row=1, col=1
+            )
 
-        #Add bar chart Modelagem
-        fig.add_trace(
-            go.Bar(x=data.FAIXA_SCORE, y=data.MODELAGEM,
-            hovertemplate = "Total de pessoa na faixa: %{y}",
-            marker_color=colors[0], name="Distribuição % - Modelagem"), row=1, col=2
-        )
+            fig.add_trace(                   
+            go.Table(
+                  columnorder = [1,2],
+                  columnwidth = [80,400],
+                header=dict(
+                    values=[Titulo],
+                    font=dict(size=12),
+                    line_color='darkslategray',
+                    fill=dict(color=['lightgreen']),
+                    align="left"
+                ),
+                cells=dict(
+                    values=[analise],
+                    line_color='darkslategray',
+                    fill=dict(color=['lightgreen']),
+                    align ="left"
+                    )
+            ),
+            row=1, col=1
+            )
 
-        #Add bar chart Out of Time
-        fig.add_trace(
-            go.Bar(x=data.FAIXA_SCORE, y=data.OUT_OF_TIME,
-            hovertemplate = "Total de pessoa na faixa: %{y}",
-            marker_color=colors[1], name="Distribuição % - Out of Time"), row=1, col=2
-        )
 
-        fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
-        fig.update_yaxes(tickformat=".2%", title_text="Distribuição %", row=1, col=2)
 
-        #Add títulos
-        fig.update_layout(
-            title= {
-                'text': "Distribuição dos Escores",
-                'y':0.9,
-                'x':0.5,
-                'xanchor': 'center',
-                'yanchor': 'top'
-            }
-        )
+            #Add bar chart Modelagem
+            fig.add_trace(
+                go.Bar(x=data.FAIXA_SCORE, y=data.MODELAGEM,
+                hovertemplate = "Total de pessoa na faixa: %{y}",
+                marker_color=colors[0], name="Distribuição % - Modelagem"), row=1, col=2
+            )
 
-        fig.show()
+            #Add bar chart Out of Time
+            fig.add_trace(
+                go.Bar(x=data.FAIXA_SCORE, y=data.OUT_OF_TIME,
+                hovertemplate = "Total de pessoa na faixa: %{y}",
+                marker_color=colors[1], name="Distribuição % - Out of Time"), row=1, col=2
+            )
 
-        return fig
+            fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
+            fig.update_yaxes(tickformat=".2%", title_text="Distribuição %", row=1, col=2)
+
+            #Add títulos
+            fig.update_layout(
+                title= {
+                    'text': "Distribuição dos Escores",
+                    'y':0.9,
+                    'x':0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top'
+                }
+            )
+
+            fig.show()
+
+            return fig
+        
+        elif Titulo == "2":
+            Titulo = "Alerta"
+            fig = make_subplots(
+            rows=1, cols=3,
+            specs= [[{"type": "table"},{"colspan": 2},None]]
+            )
+
+            # Add Table
+            fig.add_trace(                   
+            go.Table(
+                header=dict(
+                    values=["Descrição do Gráfico"],
+                    font=dict(size=12),
+                    align="left"
+                ),
+                cells=dict(
+                    values=[static_desc],
+                    line_color='darkslategray',
+                    align = "left")
+            ),
+            row=1, col=1
+            )
+
+            fig.add_trace(                   
+            go.Table(
+                  columnorder = [1,2],
+                  columnwidth = [80,400],
+                header=dict(
+                    values=[Titulo],
+                    font=dict(size=12),
+                    line_color='darkslategray',
+                    fill=dict(color=['yellow']),
+                    align="left"
+                ),
+                cells=dict(
+                    values=[analise],
+                    line_color='darkslategray',
+                    fill=dict(color=['yellow']),
+                    align ="left"
+                    )
+            ),
+            row=1, col=1
+            )
+
+
+
+            #Add bar chart Modelagem
+            fig.add_trace(
+                go.Bar(x=data.FAIXA_SCORE, y=data.MODELAGEM,
+                hovertemplate = "Total de pessoa na faixa: %{y}",
+                marker_color=colors[0], name="Distribuição % - Modelagem"), row=1, col=2
+            )
+
+            #Add bar chart Out of Time
+            fig.add_trace(
+                go.Bar(x=data.FAIXA_SCORE, y=data.OUT_OF_TIME,
+                hovertemplate = "Total de pessoa na faixa: %{y}",
+                marker_color=colors[1], name="Distribuição % - Out of Time"), row=1, col=2
+            )
+
+            fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
+            fig.update_yaxes(tickformat=".2%", title_text="Distribuição %", row=1, col=2)
+
+            #Add títulos
+            fig.update_layout(
+                title= {
+                    'text': "Distribuição dos Escores",
+                    'y':0.9,
+                    'x':0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top'
+                }
+            )
+
+            fig.show()
+
+            return fig
+
+        elif Titulo == "3":
+            Titulo = "Alerta"
+            fig = make_subplots(
+            rows=1, cols=3,
+            specs= [[{"type": "table"},{"colspan": 2},None]]
+            )
+
+            # Add Table
+            fig.add_trace(                   
+            go.Table(
+                header=dict(
+                    values=["Descrição do Gráfico"],
+                    font=dict(size=12),
+                    align="left"
+                ),
+                cells=dict(
+                    values=[static_desc],
+                    line_color='darkslategray',
+                    align = "left")
+            ),
+            row=1, col=1
+            )
+
+            fig.add_trace(                   
+            go.Table(
+                  columnorder = [1,2],
+                  columnwidth = [80,400],
+                header=dict(
+                    values=[Titulo],
+                    font=dict(size=12),
+                    line_color='darkslategray',
+                    fill=dict(color=['red']),
+                    align="left"
+                ),
+                cells=dict(
+                    values=[analise],
+                    line_color='darkslategray',
+                    fill=dict(color=['red']),
+                    align ="left"
+                    )
+            ),
+            row=1, col=1
+            )
+
+
+
+            #Add bar chart Modelagem
+            fig.add_trace(
+                go.Bar(x=data.FAIXA_SCORE, y=data.MODELAGEM,
+                hovertemplate = "Total de pessoa na faixa: %{y}",
+                marker_color=colors[0], name="Distribuição % - Modelagem"), row=1, col=2
+            )
+
+            #Add bar chart Out of Time
+            fig.add_trace(
+                go.Bar(x=data.FAIXA_SCORE, y=data.OUT_OF_TIME,
+                hovertemplate = "Total de pessoa na faixa: %{y}",
+                marker_color=colors[1], name="Distribuição % - Out of Time"), row=1, col=2
+            )
+
+            fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
+            fig.update_yaxes(tickformat=".2%", title_text="Distribuição %", row=1, col=2)
+
+            #Add títulos
+            fig.update_layout(
+                title= {
+                    'text': "Distribuição dos Escores",
+                    'y':0.9,
+                    'x':0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top'
+                }
+            )
+
+            fig.show()
+
+            return fig
 
     else:
-        raise "Flag invalida, por favor digite yes ou no"
+        raise Exception ("Flag invalida, por favor digite yes ou no")
 
 def main():
     lst = ["0-10","10-20","20-30","30-40","40-50","50-60","60-70","70-80","80-90","90-100"]
