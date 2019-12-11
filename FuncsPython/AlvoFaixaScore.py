@@ -17,10 +17,10 @@ def AlvoFaixaScore(data, casasDecimais, flag):
 
     flag = flag.strip().lower()
 
-    if flag == "no":
+    # Texto da Tabela descrevendo gráfico
+    static_desc = "A taxa de maus pagadores diminui consideravelmente à medida que a faixa de score aumenta, indicando <b>clientes mais confiáveis</b> nestas áreas."
 
-        # Texto da Tabela descrevendo gráfico
-        desc = "A taxa de maus pagadores diminui consideravelmente à medida que a faixa de score aumenta, indicando <b>clientes mais confiáveis</b> nestas áreas."
+    if flag == "no":
 
         #fig = go.Figure()
 
@@ -39,7 +39,7 @@ def AlvoFaixaScore(data, casasDecimais, flag):
                 align="left"
             ),
             cells=dict(
-                values=[desc],
+                values=[static_desc],
                 align = "left")
         ),
         row=1, col=1
@@ -115,250 +115,82 @@ def AlvoFaixaScore(data, casasDecimais, flag):
 
         pre_fig.show()
 
-        # Texto da Tabela descrevendo gráfico
-        static_desc = "A taxa de maus pagadores diminui consideravelmente à medida que a faixa de score aumenta, indicando <b>clientes mais confiáveis</b> nestas áreas."
-
-        Titulo = str(input("Tipo da Descrição [1 - Oportunidade], [2 - Alerta], [3 - Risco]: "))
+        Titulo = "0"
+        while(Titulo != "1" and Titulo != "2" and Titulo != "3"):
+            Titulo = str(input("Tipo da Descrição [1 - Oportunidade], [2 - Alerta], [3 - Risco]: "))
+        
         analise = str(input("digite a descrição desejada: "))
 
         if Titulo == "1":
             Titulo = "Oportunidade"
             headerColor = 'lightgreen'
-            # Fazendo os subplots para colocar a descrição e o gráfico na mesma imagem
-            fig = make_subplots(
-            rows=1, cols=3,
-            specs= [[{"type": "table"},{"colspan": 2},None]]
-            )
-
-            # Add Table
-            fig.add_trace(                   
-            go.Table(
-                header=dict(
-                    values=["Descrição do Gráfico"],
-                    font=dict(size=12),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[static_desc],
-                    line_color='darkslategray',
-                    align = "left")
-            ),
-            row=1, col=1
-            )
-
-            fig.add_trace(                   
-            go.Table(
-                  columnorder = [1,2],
-                  columnwidth = [80,400],
-                header=dict(
-                    values=[Titulo],
-                    font=dict(size=12),
-                    line_color='darkslategray',
-                    fill=dict(color=['lightgreen']),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[analise],
-                    line_color='darkslategray',
-                    fill=dict(color=['lightgreen']),
-                    align ="left"
-                    )
-            ),
-            row=1, col=1
-            )
-
-            #Add bar chart
-            fig.add_trace(
-                go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO,
-                hovertemplate = "Total de pessoa na faixa: %{customdata}",
-                marker_color=colors[0], name="Quantidade"), row=1, col=2
-            )
-
-            #Add line chart
-            fig.add_trace(
-                go.Scatter(x=label, y=(tratado.ALVO*tratado2.ALVO), 
-                customdata= tratado.ALVO, hovertemplate = "Percentual de maus Pagadores %{customdata}",
-                marker_color=colors[1], name="Percentual de Maus Pagadores"), row=1, col=2
-            )
-
-            fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
-            fig.update_yaxes(title_text="Contagem de Pessoas", row=1, col=2)
-
-            #Add títulos
-            fig.update_layout(
-                title= {
-                    'text': "Percentual de Maus Pagadores por Faixa de Score",
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'
-                }
-            )
-
-            fig.show()
-
-            return fig
-
 
         elif Titulo == "2":
             Titulo = "Alerta"
             headerColor = 'yellow'
-            fig = make_subplots(
-            rows=1, cols=3,
-            specs= [[{"type": "table"},{"colspan": 2},None]]
-            )
-
-            # Add Table
-            fig.add_trace(                   
-            go.Table(
-                header=dict(
-                    values=["Descrição do Gráfico"],
-                    font=dict(size=12),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[static_desc],
-                    line_color='darkslategray',
-                    align = "left")
-            ),
-            row=1, col=1
-            )
-
-            fig.add_trace(                   
-            go.Table(
-                  columnorder = [1,2],
-                  columnwidth = [80,400],
-                header=dict(
-                    values=[Titulo],
-                    font=dict(size=12),
-                    line_color='darkslategray',
-                    fill=dict(color=['yellow']),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[analise],
-                    line_color='darkslategray',
-                    fill=dict(color=['yellow']),
-                    align ="left"
-                    )
-            ),
-            row=1, col=1
-            )
-
-            #Add bar chart
-            fig.add_trace(
-                go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO,
-                hovertemplate = "Total de pessoa na faixa: %{customdata}",
-                marker_color=colors[0], name="Quantidade"), row=1, col=2
-            )
-
-            #Add line chart
-            fig.add_trace(
-                go.Scatter(x=label, y=(tratado.ALVO*tratado2.ALVO), 
-                customdata= tratado.ALVO, hovertemplate = "Percentual de maus Pagadores %{customdata}",
-                marker_color=colors[1], name="Percentual de Maus Pagadores"), row=1, col=2
-            )
-
-            fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
-            fig.update_yaxes(title_text="Contagem de Pessoas", row=1, col=2)
-
-            #Add títulos
-            fig.update_layout(
-                title= {
-                    'text': "Percentual de Maus Pagadores por Faixa de Score",
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'
-                }
-            )
-
-            fig.show()
-
-            return fig
-        
 
         elif Titulo == "3":
             Titulo = "Risco"
+            headerColor = 'red'
 
-            fig = make_subplots(
-            rows=1, cols=3,
-            specs= [[{"type": "table"},{"colspan": 2},None]]
-            )
+        fig = make_subplots(
+        rows=1, cols=3,
+        specs= [[{"type": "table"},{"colspan": 2},None]]
+        )
 
-            fig.add_trace(                   
-            go.Table(
-                header=dict(
-                    values=["Descrição do Gráfico"],
-                    font=dict(size=12),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[static_desc],
-                    line_color='darkslategray',
-                    align = "left")
+        fig.add_trace(                   
+        go.Table(
+            header=dict(
+                values=[["Descrição do Gráfico"],[Titulo]],
+                font=dict(size=12),
+                line_color='darkslategray',
+                fill=dict(color=['white',headerColor]),
+                align="left"
             ),
-            row=1, col=1
-            )
+            cells=dict(
+                values=[[static_desc],[analise]],
+                line_color='darkslategray',
+                fill=dict(color=['white',headerColor]),
+                align ="left"
+                )
+        ),
+        row=1, col=1
+        )
 
-            fig.add_trace(                   
-            go.Table(
-                  columnorder = [1,2],
-                  columnwidth = [80,400],
-                header=dict(
-                    values=[Titulo],
-                    font=dict(size=12),
-                    line_color='darkslategray',
-                    fill=dict(color=['red']),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[analise],
-                    line_color='darkslategray',
-                    fill=dict(color=['red']),
-                    align ="left"
-                    )
-            ),
-            row=1, col=1
-            )
+        #Add bar chart
+        fig.add_trace(
+            go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO,
+            hovertemplate = "Total de pessoa na faixa: %{customdata}",
+            marker_color=colors[0], name="Quantidade"), row=1, col=2
+        )
 
-            #Add bar chart
-            fig.add_trace(
-                go.Bar(x=label, y=tratado2.ALVO, customdata= tratado2.ALVO,
-                hovertemplate = "Total de pessoa na faixa: %{customdata}",
-                marker_color=colors[0], name="Quantidade"), row=1, col=2
-            )
+        #Add line chart
+        fig.add_trace(
+            go.Scatter(x=label, y=(tratado.ALVO*tratado2.ALVO), 
+            customdata= tratado.ALVO, hovertemplate = "Percentual de maus Pagadores %{customdata}",
+            marker_color=colors[1], name="Percentual de Maus Pagadores"), row=1, col=2
+        )
 
-            #Add line chart
-            fig.add_trace(
-                go.Scatter(x=label, y=(tratado.ALVO*tratado2.ALVO), 
-                customdata= tratado.ALVO, hovertemplate = "Percentual de maus Pagadores %{customdata}",
-                marker_color=colors[1], name="Percentual de Maus Pagadores"), row=1, col=2
-            )
+        fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
+        fig.update_yaxes(title_text="Contagem de Pessoas", row=1, col=2)
 
-            fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
-            fig.update_yaxes(title_text="Contagem de Pessoas", row=1, col=2)
+        #Add títulos
+        fig.update_layout(
+            title= {
+                'text': "Percentual de Maus Pagadores por Faixa de Score",
+                'y':0.9,
+                'x':0.5,
+                'xanchor': 'center',
+                'yanchor': 'top'
+            }
+        )
 
-            #Add títulos
-            fig.update_layout(
-                title= {
-                    'text': "Percentual de Maus Pagadores por Faixa de Score",
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'
-                }
-            )
+        fig.show()
 
-            fig.show()
+        return fig
 
-            return fig
-
-
-
-
-        else:
-            raise Exception ("Flag invalida, por favor digite yes ou no")
+    else:
+        raise Exception ("Flag invalida, por favor digite yes ou no")
 
 def main():
     file = "./BASE_CREDITO.txt"
