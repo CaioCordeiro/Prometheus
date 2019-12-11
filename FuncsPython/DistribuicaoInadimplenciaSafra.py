@@ -131,8 +131,8 @@ def distInadimplenciaScore(data, flag):
             headerColor = 'red'
 
         fig = make_subplots(
-        rows=1, cols=3,
-        specs= [[{"type": "table"},{"colspan": 2},None]]
+            rows=1, cols=3,
+            specs= [[{"type": "table"},{"secondary_y": True,"colspan": 2},None]]
         )
 
         fig.add_trace(                   
@@ -198,7 +198,7 @@ def main():
     lst2 = [0.06,0.07,0.07,0.07,0.07,0.07,0.06,0.07,0.07,0.07,0.07,0.07,0.06,0.07,0.07]
     lst3 = [0.15,0.15,0.14,0.14,0.12,0.13,0.13,0.13,0.14,0.15,0.16,0.17,0.17,0.13,0.16]
     dataframe = pd.DataFrame(list(zip(lst,lst2,lst3)),columns=['MES_ANO','SAFRA','TAXA_INADIMPLENCIA'])
-    distInadimplenciaScore(dataframe,"no")
+    distInadimplenciaScore(dataframe,"yes")
 
 if __name__ == '__main__':
     main()
