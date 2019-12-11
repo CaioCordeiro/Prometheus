@@ -123,6 +123,7 @@ def AlvoFaixaScore(data, casasDecimais, flag):
 
         if Titulo == "1":
             Titulo = "Oportunidade"
+            headerColor = 'lightgreen'
             # Fazendo os subplots para colocar a descrição e o gráfico na mesma imagem
             fig = make_subplots(
             rows=1, cols=3,
@@ -134,11 +135,15 @@ def AlvoFaixaScore(data, casasDecimais, flag):
             go.Table(
                 header=dict(
                     values=[Titulo],
+                    line_color='darkslategray',
+                    fill_color=headerColor,
                     font=dict(size=10),
                     align="left"
                 ),
                 cells=dict(
                     values=[[static_desc,analise]],
+                    line_color='lightgreen',
+                    fill_color=headerColor,
                     align = "left")
             ),
             row=1, col=1
@@ -179,7 +184,7 @@ def AlvoFaixaScore(data, casasDecimais, flag):
 
         elif Titulo == "2":
             Titulo = "Alerta"
-                    # Fazendo os subplots para colocar a descrição e o gráfico na mesma imagem
+            headerColor = 'yellow'
             fig = make_subplots(
             rows=1, cols=3,
             specs= [[{"type": "table"},{"colspan": 2},None]]
@@ -190,11 +195,15 @@ def AlvoFaixaScore(data, casasDecimais, flag):
             go.Table(
                 header=dict(
                     values=[Titulo],
+                    line_color='yellow',
+                    fill_color=headerColor,
                     font=dict(size=10),
                     align="left"
                 ),
                 cells=dict(
                     values=[[static_desc,analise]],
+                    line_color='yellow',
+                    fill_color=headerColor,
                     align = "left")
             ),
             row=1, col=1
@@ -236,7 +245,7 @@ def AlvoFaixaScore(data, casasDecimais, flag):
         elif Titulo == "3":
             Titulo = "Risco"
 
-            # Fazendo os subplots para colocar a descrição e o gráfico na mesma imagem
+            headerColor= 'crimson'
             fig = make_subplots(
             rows=1, cols=3,
             specs= [[{"type": "table"},{"colspan": 2},None]]
@@ -248,10 +257,14 @@ def AlvoFaixaScore(data, casasDecimais, flag):
                 header=dict(
                     values=[Titulo],
                     font=dict(size=10),
+                    line_color='red',
+                    fill_color=headerColor,
                     align="left"
                 ),
                 cells=dict(
                     values=[[static_desc,analise]],
+                    line_color='red',
+                    fill_color=headerColor,
                     align = "left")
             ),
             row=1, col=1
