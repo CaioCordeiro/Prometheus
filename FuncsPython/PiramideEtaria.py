@@ -18,13 +18,15 @@ def PiramideEtaria(data, flag):
 
     #print(tratado.groupby('SEXO').get_group("F"))
 
+    static_desc = "Pirâmide etária ou pirâmide demográfica, consiste num histograma que mostra a distribuição de diferentes grupos etários numa população, em que normalmente se cria a forma de uma pirâmide cuja altura é proporcional à quantidade que representa a estrutura da população por sexo e idade, designado de cortes."
+
+
     flag = flag.strip().lower()
 
     if flag == "no":
 
         # Texto da Tabela descrevendo gráfico
-        static_desc = "Pirâmide etária ou pirâmide demográfica, consiste num histograma que mostra a distribuição de diferentes grupos etários numa população, em que normalmente se cria a forma de uma pirâmide cuja altura é proporcional à quantidade que representa a estrutura da população por sexo e idade, designado de cortes."
-        
+        static_desc = static_desc
         
         #fig = go.Figure()
 
@@ -43,7 +45,7 @@ def PiramideEtaria(data, flag):
                 align="left"
             ),
             cells=dict(
-                values=[desc],
+                values=[static_desc],
                 font=dict(size=10),
                 align = "left")
         ),
@@ -630,7 +632,7 @@ def PiramideEtaria(data, flag):
 def main():
     file = "./BASE_CREDITO.txt"
     dataframe = pd.read_csv(file, delimiter= '\t')
-    html = PiramideEtaria(dataframe, "no")
+    html = PiramideEtaria(dataframe, "yes")
 
     # text = pio.to_html(html)
 

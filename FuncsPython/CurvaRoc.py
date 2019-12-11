@@ -239,7 +239,7 @@ def CurvaRoc(data,flag):
 
             return fig
         
-        elif Titulo == "2":
+        elif Titulo == "3":
             Titulo = "Risco"
 
             fig = make_subplots(
