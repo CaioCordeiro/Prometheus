@@ -8,7 +8,7 @@ def distInadimplenciaScore(data, flag):
     colors=["rgba(0, 33, 64,1)", "rgba(206, 21, 67,1)"]
 
      # Texto da Tabela descrevendo gráfico
-    desc = "Lorem Ipsum"
+    desc = "Podemos observar nas barras em azul a representatividade de cada faixa de score. Nas bolas em vermelho, obervamos a taxa de inadimplência dentro se cada faixa de score."
 
     flag = flag.strip().lower()
 

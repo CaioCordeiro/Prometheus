@@ -8,7 +8,7 @@ def distInadimplenciaScore(data, flag):
     colors=["rgba(0, 33, 64,1)", "rgba(206, 21, 67,1)"]
 
      # Texto da Tabela descrevendo gráfico
-    desc = "Lorem Ipsum"
+    desc = "No gráfico de distribuição e taxa de inadimplência por safra observamos nas barras em azul a representatividade de cada mês utilizado na análise. A taxa em vermelho significa a inadimplência referente a cada mês."
 
     flag = flag.strip().lower()
 
