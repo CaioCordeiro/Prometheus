@@ -5,7 +5,7 @@ import math
 import plotly.graph_objects as go 
 from plotly.subplots import make_subplots
 
-def PiramideEtaria(data, flag):
+def AreaRiscoSeg(data, flag):
     colors=["rgba(0, 33, 64,0.5)", "rgba(0, 33, 64,1)","rgba(206, 21, 67,0.5)", "rgba(206, 21, 67,1)"]
 
     flag = flag.strip().lower()
@@ -279,7 +279,7 @@ def main():
     lis2 = [0.004,0.018,0.149,0.258,0.571]
     lis3 = [0.003,0.014,0.132,0.272,0.580]
     dataframe = pd.DataFrame(list(zip(lis,lis2,lis3)),columns=['CLASSE_SOCIAL','SEG','RISCO'])
-    html = PiramideEtaria(dataframe, "yes")
+    html = AreaRiscoSeg(dataframe, "yes")
 
 if __name__ == '__main__':
     main()
