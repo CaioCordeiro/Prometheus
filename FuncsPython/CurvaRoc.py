@@ -98,214 +98,71 @@ def CurvaRoc(data,flag):
 
         pre_fig.show()
 
-        static_desc = static_desc
-        Titulo = str(input("Tipo da Descrição [1 - Oportunidade], [2 - Alerta], [3 - Risco]: "))
+        Titulo = "0"
+        while(Titulo != "1" and Titulo != "2" and Titulo != "3"):
+            Titulo = str(input("Tipo da Descrição [1 - Oportunidade], [2 - Alerta], [3 - Risco]: "))
+        
         analise = str(input("digite a descrição desejada: "))
 
-        # Fazendo os subplots para colocar a descrição e o gráfico na mesma imagem
         if Titulo == "1":
             Titulo = "Oportunidade"
-
-            fig = make_subplots(
-            rows=1, cols=3,
-            specs= [[{"type": "table"},{"colspan": 2},None]]
-            )
-
-            # Add Table
-            fig.add_trace(                   
-            go.Table(
-                header=dict(
-                    values=["Descrição do Gráfico"],
-                    font=dict(size=12),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[static_desc],
-                    line_color='darkslategray',
-                    align = "left")
-            ),
-            row=1, col=1
-            )
-
-            fig.add_trace(                   
-            go.Table(
-                  columnorder = [1,2],
-                  columnwidth = [80,400],
-                header=dict(
-                    values=[Titulo],
-                    font=dict(size=12),
-                    line_color='darkslategray',
-                    fill=dict(color=['lightgreen']),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[analise],
-                    line_color='darkslategray',
-                    fill=dict(color=['lightgreen']),
-                    align ="left"
-                    )
-            ),
-            row=1, col=1
-            )
-            # Add linha de Curva Roc
-            fig.add_trace(
-                go.Scatter(x=data.FPR, y=data.TPR, name=("Curva ROC, AUC = "+str(round(-1*auc,2))), marker_color=colors[0]), row=1, col=2
-            )
-
-            fig.update_xaxes(title_text="1-Especificidade", row=1, col=2)
-            fig.update_yaxes(title_text="Sensibilidade", row=1, col=2)
-
-            #Add Formatação do Gráfico
-            fig.update_layout(
-                title= {
-                    'text': "Performance - Roc",
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'
-                },
-                showlegend = True
-            )
-
-            fig.show()
-
-            return fig
+            headerColor = 'lightgreen'
 
         elif Titulo == "2":
             Titulo = "Alerta"
+            headerColor = 'yellow'
 
-            fig = make_subplots(
-            rows=1, cols=3,
-            specs= [[{"type": "table"},{"colspan": 2},None]]
-            )
-
-            # Add Table
-            fig.add_trace(                   
-            go.Table(
-                header=dict(
-                    values=["Descrição do Gráfico"],
-                    font=dict(size=12),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[static_desc],
-                    line_color='darkslategray',
-                    align = "left")
-            ),
-            row=1, col=1
-            )
-
-            fig.add_trace(                   
-            go.Table(
-                  columnorder = [1,2],
-                  columnwidth = [80,400],
-                header=dict(
-                    values=[Titulo],
-                    font=dict(size=12),
-                    line_color='darkslategray',
-                    fill=dict(color=['yellow']),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[analise],
-                    line_color='darkslategray',
-                    fill=dict(color=['yellow']),
-                    align ="left"
-                    )
-            ),
-            row=1, col=1
-            )
-            # Add linha de Curva Roc
-            fig.add_trace(
-                go.Scatter(x=data.FPR, y=data.TPR, name=("Curva ROC, AUC = "+str(round(-1*auc,2))), marker_color=colors[0]), row=1, col=2
-            )
-
-            fig.update_xaxes(title_text="1-Especificidade", row=1, col=2)
-            fig.update_yaxes(title_text="Sensibilidade", row=1, col=2)
-
-            #Add Formatação do Gráfico
-            fig.update_layout(
-                title= {
-                    'text': "Performance - Roc",
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'
-                },
-                showlegend = True
-            )
-
-            fig.show()
-
-            return fig
-        
         elif Titulo == "3":
             Titulo = "Risco"
+            headerColor = 'red'
 
-            fig = make_subplots(
-            rows=1, cols=3,
-            specs= [[{"type": "table"},{"colspan": 2},None]]
-            )
+        fig = make_subplots(
+        rows=1, cols=3,
+        specs= [[{"type": "table"},{"colspan": 2},None]]
+        )
 
-            # Add Table
-            fig.add_trace(                   
-            go.Table(
-                header=dict(
-                    values=["Descrição do Gráfico"],
-                    font=dict(size=12),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[static_desc],
-                    line_color='darkslategray',
-                    align = "left")
+        fig.add_trace(                   
+        go.Table(
+            header=dict(
+                values=[["Descrição do Gráfico"],[Titulo]],
+                font=dict(size=12),
+                line_color='darkslategray',
+                fill=dict(color=['white',headerColor]),
+                align="left"
             ),
-            row=1, col=1
-            )
+            cells=dict(
+                values=[[static_desc],[analise]],
+                line_color='darkslategray',
+                fill=dict(color=['white',headerColor]),
+                align ="left"
+                )
+        ),
+        row=1, col=1
+        )
+    
+        # Add linha de Curva Roc
+        fig.add_trace(
+            go.Scatter(x=data.FPR, y=data.TPR, name=("Curva ROC, AUC = "+str(round(-1*auc,2))), marker_color=colors[0]), row=1, col=2
+        )
 
-            fig.add_trace(                   
-            go.Table(
-                  columnorder = [1,2],
-                  columnwidth = [80,400],
-                header=dict(
-                    values=[Titulo],
-                    font=dict(size=12),
-                    line_color='darkslategray',
-                    fill=dict(color=['red']),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[analise],
-                    line_color='darkslategray',
-                    fill=dict(color=['red']),
-                    align ="left"
-                    )
-            ),
-            row=1, col=1
-            )
-            # Add linha de Curva Roc
-            fig.add_trace(
-                go.Scatter(x=data.FPR, y=data.TPR, name=("Curva ROC, AUC = "+str(round(-1*auc,2))), marker_color=colors[0]), row=1, col=2
-            )
+        fig.update_xaxes(title_text="1-Especificidade", row=1, col=2)
+        fig.update_yaxes(title_text="Sensibilidade", row=1, col=2)
 
-            fig.update_xaxes(title_text="1-Especificidade", row=1, col=2)
-            fig.update_yaxes(title_text="Sensibilidade", row=1, col=2)
+        #Add Formatação do Gráfico
+        fig.update_layout(
+            title= {
+                'text': "Performance - Roc",
+                'y':0.9,
+                'x':0.5,
+                'xanchor': 'center',
+                'yanchor': 'top'
+            },
+            showlegend = True
+        )
 
-            #Add Formatação do Gráfico
-            fig.update_layout(
-                title= {
-                    'text': "Performance - Roc",
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'
-                },
-                showlegend = True
-            )
+        fig.show()
 
-            fig.show()
-
-            return fig
+        return fig
     
     else:
         raise Exception(" Flag invalida, por favor digite 'YES' ou 'NO' ")

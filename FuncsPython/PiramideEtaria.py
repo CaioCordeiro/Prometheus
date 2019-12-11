@@ -228,404 +228,133 @@ def PiramideEtaria(data, flag):
 
         pre_fig.show()
 
-        static_desc=static_desc
-        Titulo = str(input("Tipo da Descrição [1 - Oportunidade], [2 - Alerta], [3 - Risco]: "))
+        Titulo = "0"
+        while(Titulo != "1" and Titulo != "2" and Titulo != "3"):
+            Titulo = str(input("Tipo da Descrição [1 - Oportunidade], [2 - Alerta], [3 - Risco]: "))
+        
         analise = str(input("digite a descrição desejada: "))
 
-        # Fazendo os subplots para colocar a descrição e o gráfico na mesma imagem
         if Titulo == "1":
             Titulo = "Oportunidade"
-            fig = make_subplots(
-            rows=1, cols=3,
-            specs= [[{"type": "table"},{"colspan": 2},None]]
-            )
+            headerColor = 'lightgreen'
 
-            # Add Table
-            fig.add_trace(                   
-            go.Table(
-                header=dict(
-                    values=["Descrição do Gráfico"],
-                    font=dict(size=12),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[static_desc],
-                    line_color='darkslategray',
-                    align = "left")
-            ),
-            row=1, col=1
-            )
-
-            fig.add_trace(                   
-            go.Table(
-                  columnorder = [1,2],
-                  columnwidth = [80,400],
-                header=dict(
-                    values=[Titulo],
-                    font=dict(size=12),
-                    line_color='darkslategray',
-                    fill=dict(color=['lightgreen']),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[analise],
-                    line_color='darkslategray',
-                    fill=dict(color=['lightgreen']),
-                    align ="left"
-                    )
-            ),
-            row=1, col=1
-            )
-
-
-
-            #Add Masculino Total
-            fig.add_trace(
-            go.Bar(y=label,
-                x= np.repeat(totalPessoas.get("M"),5),
-                orientation='h',
-                name='Masculino Total',
-                customdata= np.repeat(totalPessoas.get("M"),5),
-                text=tratado.groupby('SEXO').get_group("M").IDADE,
-                hovertemplate= "Total de pessoas do sexo: %{customdata}<br> Total de pessoas do sexo na faixa: %{text}",
-                marker_color=colors[0]
-                ), row=1, col=2
-            )
-
-            #Add Masculino Total por Faixa Etaria
-            fig.add_trace(
-            go.Bar(y=label,
-                x= tratado.groupby('SEXO').get_group("M").IDADE,
-                orientation='h',
-                name='Masculino por Faixa',
-                customdata= np.repeat(totalPessoas.get("M"),5),
-                text=tratado.groupby('SEXO').get_group("M").IDADE,
-                hovertemplate= "Total de pessoas do sexo: %{customdata}<br> Total de pessoas do sexo na faixa: %{text}",
-                marker_color=colors[1]
-                ), row=1, col=2
-            )
-
-            #Add Feminino Total
-            fig.add_trace(
-            go.Bar(y=label,
-                x= np.repeat(-1*totalPessoas.get("F"),5),
-                orientation='h',
-                name='Feminino Total',
-                customdata= np.repeat(totalPessoas.get("F"),5),
-                text=tratado.groupby('SEXO').get_group("F").IDADE,
-                hovertemplate= "Total de pessoas do sexo: %{customdata}<br> Total de pessoas do sexo na faixa: %{text}",
-                marker_color=colors[2]
-                ), row=1, col=2
-            )
-
-            #Add Feminino Total por Faixa Etaria
-            fig.add_trace(
-                go.Bar(y=label,
-                x= -1 * tratado.groupby('SEXO').get_group("F").IDADE,
-                orientation='h',
-                name='Feminino por Faixa',
-                customdata= np.repeat(totalPessoas.get("F"),5),
-                text=tratado.groupby('SEXO').get_group("F").IDADE,
-                hovertemplate= "Total de pessoas do sexo: %{customdata}<br> Total de pessoas do sexo na faixa: %{text}",
-                marker_color=colors[3]
-                ), row=1, col=2
-            )
-
-            xaxisTickPre = list(range(-1*totalPessoas.get("F")-100,totalPessoas.get("M")+100,50))
-
-            xaxisTick = []
-
-            for num in xaxisTickPre:
-                xaxisTick.append(round(num/100)*100)
-
-            xaxisTickText = [abs(i) for i in xaxisTick] 
-
-            fig.update_xaxes(title_text="Contagem de Pessoas", row=1, col=2)
-            fig.update_xaxes(
-                tickvals= xaxisTick,
-                ticktext= xaxisTickText,
-                row=1, col=2
-            )
-            fig.update_yaxes(title_text="Faixa Etária", row=1, col=2)
-
-            #Add títulos
-            fig.update_layout(
-                title= {
-                    'text': "Pirâmide Etária",
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'
-                },
-                barmode = 'overlay'
-            )
-
-            fig.show()
-
-            return fig
-        
         elif Titulo == "2":
             Titulo = "Alerta"
-            fig = make_subplots(
-            rows=1, cols=3,
-            specs= [[{"type": "table"},{"colspan": 2},None]]
-            )
+            headerColor = 'yellow'
 
-            # Add Table
-            fig.add_trace(                   
-            go.Table(
-                header=dict(
-                    values=["Descrição do Gráfico"],
-                    font=dict(size=12),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[static_desc],
-                    line_color='darkslategray',
-                    align = "left")
-            ),
-            row=1, col=1
-            )
-
-            fig.add_trace(                   
-            go.Table(
-                  columnorder = [1,2],
-                  columnwidth = [80,400],
-                header=dict(
-                    values=[Titulo],
-                    font=dict(size=12),
-                    line_color='darkslategray',
-                    fill=dict(color=['yellow']),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[analise],
-                    line_color='darkslategray',
-                    fill=dict(color=['yellow']),
-                    align ="left"
-                    )
-            ),
-            row=1, col=1
-            )
-
-
-
-            #Add Masculino Total
-            fig.add_trace(
-            go.Bar(y=label,
-                x= np.repeat(totalPessoas.get("M"),5),
-                orientation='h',
-                name='Masculino Total',
-                customdata= np.repeat(totalPessoas.get("M"),5),
-                text=tratado.groupby('SEXO').get_group("M").IDADE,
-                hovertemplate= "Total de pessoas do sexo: %{customdata}<br> Total de pessoas do sexo na faixa: %{text}",
-                marker_color=colors[0]
-                ), row=1, col=2
-            )
-
-            #Add Masculino Total por Faixa Etaria
-            fig.add_trace(
-            go.Bar(y=label,
-                x= tratado.groupby('SEXO').get_group("M").IDADE,
-                orientation='h',
-                name='Masculino por Faixa',
-                customdata= np.repeat(totalPessoas.get("M"),5),
-                text=tratado.groupby('SEXO').get_group("M").IDADE,
-                hovertemplate= "Total de pessoas do sexo: %{customdata}<br> Total de pessoas do sexo na faixa: %{text}",
-                marker_color=colors[1]
-                ), row=1, col=2
-            )
-
-            #Add Feminino Total
-            fig.add_trace(
-            go.Bar(y=label,
-                x= np.repeat(-1*totalPessoas.get("F"),5),
-                orientation='h',
-                name='Feminino Total',
-                customdata= np.repeat(totalPessoas.get("F"),5),
-                text=tratado.groupby('SEXO').get_group("F").IDADE,
-                hovertemplate= "Total de pessoas do sexo: %{customdata}<br> Total de pessoas do sexo na faixa: %{text}",
-                marker_color=colors[2]
-                ), row=1, col=2
-            )
-
-            #Add Feminino Total por Faixa Etaria
-            fig.add_trace(
-                go.Bar(y=label,
-                x= -1 * tratado.groupby('SEXO').get_group("F").IDADE,
-                orientation='h',
-                name='Feminino por Faixa',
-                customdata= np.repeat(totalPessoas.get("F"),5),
-                text=tratado.groupby('SEXO').get_group("F").IDADE,
-                hovertemplate= "Total de pessoas do sexo: %{customdata}<br> Total de pessoas do sexo na faixa: %{text}",
-                marker_color=colors[3]
-                ), row=1, col=2
-            )
-
-            xaxisTickPre = list(range(-1*totalPessoas.get("F")-100,totalPessoas.get("M")+100,50))
-
-            xaxisTick = []
-
-            for num in xaxisTickPre:
-                xaxisTick.append(round(num/100)*100)
-
-            xaxisTickText = [abs(i) for i in xaxisTick] 
-
-            fig.update_xaxes(title_text="Contagem de Pessoas", row=1, col=2)
-            fig.update_xaxes(
-                tickvals= xaxisTick,
-                ticktext= xaxisTickText,
-                row=1, col=2
-            )
-            fig.update_yaxes(title_text="Faixa Etária", row=1, col=2)
-
-            #Add títulos
-            fig.update_layout(
-                title= {
-                    'text': "Pirâmide Etária",
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'
-                },
-                barmode = 'overlay'
-            )
-
-            fig.show()
-
-            return fig
-        
         elif Titulo == "3":
             Titulo = "Risco"
-            fig = make_subplots(
-            rows=1, cols=3,
-            specs= [[{"type": "table"},{"colspan": 2},None]]
-            )
+            headerColor = 'red'
 
-            # Add Table
-            fig.add_trace(                   
-            go.Table(
-                header=dict(
-                    values=["Descrição do Gráfico"],
-                    font=dict(size=12),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[static_desc],
-                    line_color='darkslategray',
-                    align = "left")
+        fig = make_subplots(
+        rows=1, cols=3,
+        specs= [[{"type": "table"},{"colspan": 2},None]]
+        )
+
+        fig.add_trace(                   
+        go.Table(
+            header=dict(
+                values=[["Descrição do Gráfico"],[Titulo]],
+                font=dict(size=12),
+                line_color='darkslategray',
+                fill=dict(color=['white',headerColor]),
+                align="left"
             ),
-            row=1, col=1
-            )
+            cells=dict(
+                values=[[static_desc],[analise]],
+                line_color='darkslategray',
+                fill=dict(color=['white',headerColor]),
+                align ="left"
+                )
+        ),
+        row=1, col=1
+        )
+ 
+        #Add Masculino Total
+        fig.add_trace(
+        go.Bar(y=label,
+            x= np.repeat(totalPessoas.get("M"),5),
+            orientation='h',
+            name='Masculino Total',
+            customdata= np.repeat(totalPessoas.get("M"),5),
+            text=tratado.groupby('SEXO').get_group("M").IDADE,
+            hovertemplate= "Total de pessoas do sexo: %{customdata}<br> Total de pessoas do sexo na faixa: %{text}",
+            marker_color=colors[0]
+            ), row=1, col=2
+        )
 
-            fig.add_trace(                   
-            go.Table(
-                  columnorder = [1,2],
-                  columnwidth = [80,400],
-                header=dict(
-                    values=[Titulo],
-                    font=dict(size=12),
-                    line_color='darkslategray',
-                    fill=dict(color=['red']),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[analise],
-                    line_color='darkslategray',
-                    fill=dict(color=['red']),
-                    align ="left"
-                    )
-            ),
-            row=1, col=1
-            )
+        #Add Masculino Total por Faixa Etaria
+        fig.add_trace(
+        go.Bar(y=label,
+            x= tratado.groupby('SEXO').get_group("M").IDADE,
+            orientation='h',
+            name='Masculino por Faixa',
+            customdata= np.repeat(totalPessoas.get("M"),5),
+            text=tratado.groupby('SEXO').get_group("M").IDADE,
+            hovertemplate= "Total de pessoas do sexo: %{customdata}<br> Total de pessoas do sexo na faixa: %{text}",
+            marker_color=colors[1]
+            ), row=1, col=2
+        )
 
+        #Add Feminino Total
+        fig.add_trace(
+        go.Bar(y=label,
+            x= np.repeat(-1*totalPessoas.get("F"),5),
+            orientation='h',
+            name='Feminino Total',
+            customdata= np.repeat(totalPessoas.get("F"),5),
+            text=tratado.groupby('SEXO').get_group("F").IDADE,
+            hovertemplate= "Total de pessoas do sexo: %{customdata}<br> Total de pessoas do sexo na faixa: %{text}",
+            marker_color=colors[2]
+            ), row=1, col=2
+        )
 
-
-            #Add Masculino Total
-            fig.add_trace(
+        #Add Feminino Total por Faixa Etaria
+        fig.add_trace(
             go.Bar(y=label,
-                x= np.repeat(totalPessoas.get("M"),5),
-                orientation='h',
-                name='Masculino Total',
-                customdata= np.repeat(totalPessoas.get("M"),5),
-                text=tratado.groupby('SEXO').get_group("M").IDADE,
-                hovertemplate= "Total de pessoas do sexo: %{customdata}<br> Total de pessoas do sexo na faixa: %{text}",
-                marker_color=colors[0]
-                ), row=1, col=2
-            )
+            x= -1 * tratado.groupby('SEXO').get_group("F").IDADE,
+            orientation='h',
+            name='Feminino por Faixa',
+            customdata= np.repeat(totalPessoas.get("F"),5),
+            text=tratado.groupby('SEXO').get_group("F").IDADE,
+            hovertemplate= "Total de pessoas do sexo: %{customdata}<br> Total de pessoas do sexo na faixa: %{text}",
+            marker_color=colors[3]
+            ), row=1, col=2
+        )
 
-            #Add Masculino Total por Faixa Etaria
-            fig.add_trace(
-            go.Bar(y=label,
-                x= tratado.groupby('SEXO').get_group("M").IDADE,
-                orientation='h',
-                name='Masculino por Faixa',
-                customdata= np.repeat(totalPessoas.get("M"),5),
-                text=tratado.groupby('SEXO').get_group("M").IDADE,
-                hovertemplate= "Total de pessoas do sexo: %{customdata}<br> Total de pessoas do sexo na faixa: %{text}",
-                marker_color=colors[1]
-                ), row=1, col=2
-            )
+        xaxisTickPre = list(range(-1*totalPessoas.get("F")-100,totalPessoas.get("M")+100,50))
 
-            #Add Feminino Total
-            fig.add_trace(
-            go.Bar(y=label,
-                x= np.repeat(-1*totalPessoas.get("F"),5),
-                orientation='h',
-                name='Feminino Total',
-                customdata= np.repeat(totalPessoas.get("F"),5),
-                text=tratado.groupby('SEXO').get_group("F").IDADE,
-                hovertemplate= "Total de pessoas do sexo: %{customdata}<br> Total de pessoas do sexo na faixa: %{text}",
-                marker_color=colors[2]
-                ), row=1, col=2
-            )
+        xaxisTick = []
 
-            #Add Feminino Total por Faixa Etaria
-            fig.add_trace(
-                go.Bar(y=label,
-                x= -1 * tratado.groupby('SEXO').get_group("F").IDADE,
-                orientation='h',
-                name='Feminino por Faixa',
-                customdata= np.repeat(totalPessoas.get("F"),5),
-                text=tratado.groupby('SEXO').get_group("F").IDADE,
-                hovertemplate= "Total de pessoas do sexo: %{customdata}<br> Total de pessoas do sexo na faixa: %{text}",
-                marker_color=colors[3]
-                ), row=1, col=2
-            )
+        for num in xaxisTickPre:
+            xaxisTick.append(round(num/100)*100)
 
-            xaxisTickPre = list(range(-1*totalPessoas.get("F")-100,totalPessoas.get("M")+100,50))
+        xaxisTickText = [abs(i) for i in xaxisTick] 
 
-            xaxisTick = []
+        fig.update_xaxes(title_text="Contagem de Pessoas", row=1, col=2)
+        fig.update_xaxes(
+            tickvals= xaxisTick,
+            ticktext= xaxisTickText,
+            row=1, col=2
+        )
+        fig.update_yaxes(title_text="Faixa Etária", row=1, col=2)
 
-            for num in xaxisTickPre:
-                xaxisTick.append(round(num/100)*100)
+        #Add títulos
+        fig.update_layout(
+            title= {
+                'text': "Pirâmide Etária",
+                'y':0.9,
+                'x':0.5,
+                'xanchor': 'center',
+                'yanchor': 'top'
+            },
+            barmode = 'overlay'
+        )
 
-            xaxisTickText = [abs(i) for i in xaxisTick] 
+        fig.show()
 
-            fig.update_xaxes(title_text="Contagem de Pessoas", row=1, col=2)
-            fig.update_xaxes(
-                tickvals= xaxisTick,
-                ticktext= xaxisTickText,
-                row=1, col=2
-            )
-            fig.update_yaxes(title_text="Faixa Etária", row=1, col=2)
+        return fig
 
-            #Add títulos
-            fig.update_layout(
-                title= {
-                    'text': "Pirâmide Etária",
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'
-                },
-                barmode = 'overlay'
-            )
-
-            fig.show()
-
-            return fig
-    
     else:
         raise Exception("Flag invalida, por favor digite yes ou no")
 

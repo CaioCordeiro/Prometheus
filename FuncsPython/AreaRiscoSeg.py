@@ -10,6 +10,9 @@ def PiramideEtaria(data, flag):
 
     flag = flag.strip().lower()
 
+    static_desc = """No gráfico podemos observar a frequência de indivíduos em áreas de risco (em vermelho) 
+        e área de segurança (em azul) em cada classe social."""
+
     if flag == "no":
 
         # Texto da Tabela descrevendo gráfico
@@ -165,334 +168,109 @@ def PiramideEtaria(data, flag):
         )
 
         pre_fig.show()
-
-
-        static_desc = """No gráfico podemos observar a frequência de indivíduos em áreas de risco (em vermelho) 
-        e área de segurança (em azul) em cada classe social."""
-        Titulo = str(input("Tipo da Descrição [1 - Oportunidade], [2 - Alerta], [3 - Risco]: "))
+        
+        Titulo = "0"
+        while(Titulo != "1" and Titulo != "2" and Titulo != "3"):
+            Titulo = str(input("Tipo da Descrição [1 - Oportunidade], [2 - Alerta], [3 - Risco]: "))
+        
         analise = str(input("digite a descrição desejada: "))
 
         if Titulo == "1":
             Titulo = "Oportunidade"
-
             headerColor = 'lightgreen'
-            # Fazendo os subplots para colocar a descrição e o gráfico na mesma imagem
-            fig = make_subplots(
-            rows=1, cols=3,
-            specs= [[{"type": "table"},{"colspan": 2},None]]
-            )
 
-            # Add Table
-            fig.add_trace(                   
-            go.Table(
-                header=dict(
-                    values=["Descrição do Gráfico"],
-                    font=dict(size=12),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[static_desc],
-                    line_color='darkslategray',
-                    align = "left")
-            ),
-            row=1, col=1
-            )
-
-            fig.add_trace(                   
-            go.Table(
-                  columnorder = [1,2],
-                  columnwidth = [80,400],
-                header=dict(
-                    values=[Titulo],
-                    font=dict(size=12),
-                    line_color='darkslategray',
-                    fill=dict(color=['lightgreen']),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[analise],
-                    line_color='darkslategray',
-                    fill=dict(color=['lightgreen']),
-                    align ="left"
-                    )
-            ),
-            row=1, col=1
-            )
-
-            #Add Segurança
-            fig.add_trace(
-            go.Bar(
-                y= data.CLASSE_SOCIAL,
-                x= -1* data.SEG,
-                orientation='h',
-                name='Áreas de Segurança',
-                customdata= pd.Series(["{0:.1f}%".format(val * 100) for val in data['SEG']], index = data.SEG),
-                hovertemplate= "Percentual de Área Segurança da Classe: %{customdata}",
-                marker_color=colors[1]
-                ), row=1, col=2
-            )
-
-            #Add Risco
-            fig.add_trace(
-            go.Bar(
-                y= data.CLASSE_SOCIAL,
-                x= data.RISCO,
-                orientation='h',
-                name='Áreas de Risco',
-                customdata= pd.Series(["{0:.1f}%".format(val * 100) for val in data['RISCO']], index = data.RISCO),
-                hovertemplate= "Percentual de Área Risco da Classe: %{customdata}",
-                marker_color=colors[3]
-                ), row=1, col=2
-            )
-
-
-            xaxisTickPre = list(np.arange(-1,+1,0.1))
-
-            xaxisTick = []
-
-            for num in xaxisTickPre:
-                xaxisTick.append(round(num/0.1,3)*0.1)
-
-            xaxisTickText = [abs(i) for i in xaxisTick]
-
-            fig.update_xaxes(title_text="Percentual de Segurança x Percentual de Risco", row=1, col=2)
-            fig.update_xaxes(
-                tickvals= xaxisTick,
-                ticktext= ["{0:.2f}%".format(val * 100) for val in xaxisTickText],
-                row=1, col=2
-            )
-            fig.update_yaxes(title_text="Classe Social", row=1, col=2)
-
-            #Add títulos
-            fig.update_layout(
-                title= {
-                    'text': "ÁREA DE RISCO X SEGURANÇA",
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'
-                },
-                barmode = 'overlay'
-            )
-
-            fig.show()
-
-            return fig
-        
         elif Titulo == "2":
             Titulo = "Alerta"
             headerColor = 'yellow'
 
-            # Fazendo os subplots para colocar a descrição e o gráfico na mesma imagem
-            fig = make_subplots(
-            rows=1, cols=3,
-            specs= [[{"type": "table"},{"colspan": 2},None]]
-            )
-
-            # Add Table
-            fig.add_trace(                   
-            go.Table(
-                header=dict(
-                    values=["Descrição do Gráfico"],
-                    font=dict(size=12),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[static_desc],
-                    line_color='darkslategray',
-                    align = "left")
-            ),
-            row=1, col=1
-            )
-
-            fig.add_trace(                   
-            go.Table(
-                  columnorder = [1,2],
-                  columnwidth = [80,400],
-                header=dict(
-                    values=[Titulo],
-                    font=dict(size=12),
-                    line_color='darkslategray',
-                    fill=dict(color=['yellow']),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[analise],
-                    line_color='darkslategray',
-                    fill=dict(color=['yellow']),
-                    align ="left"
-                    )
-            ),
-            row=1, col=1
-            )
-
-            #Add Segurança
-            fig.add_trace(
-            go.Bar(
-                y= data.CLASSE_SOCIAL,
-                x= -1* data.SEG,
-                orientation='h',
-                name='Áreas de Segurança',
-                customdata= pd.Series(["{0:.1f}%".format(val * 100) for val in data['SEG']], index = data.SEG),
-                hovertemplate= "Percentual de Área Segurança da Classe: %{customdata}",
-                marker_color=colors[1]
-                ), row=1, col=2
-            )
-
-            #Add Risco
-            fig.add_trace(
-            go.Bar(
-                y= data.CLASSE_SOCIAL,
-                x= data.RISCO,
-                orientation='h',
-                name='Áreas de Risco',
-                customdata= pd.Series(["{0:.1f}%".format(val * 100) for val in data['RISCO']], index = data.RISCO),
-                hovertemplate= "Percentual de Área Risco da Classe: %{customdata}",
-                marker_color=colors[3]
-                ), row=1, col=2
-            )
-
-
-            xaxisTickPre = list(np.arange(-1,+1,0.1))
-
-            xaxisTick = []
-
-            for num in xaxisTickPre:
-                xaxisTick.append(round(num/0.1,3)*0.1)
-
-            xaxisTickText = [abs(i) for i in xaxisTick]
-
-            fig.update_xaxes(title_text="Percentual de Segurança x Percentual de Risco", row=1, col=2)
-            fig.update_xaxes(
-                tickvals= xaxisTick,
-                ticktext= ["{0:.2f}%".format(val * 100) for val in xaxisTickText],
-                row=1, col=2
-            )
-            fig.update_yaxes(title_text="Classe Social", row=1, col=2)
-
-            #Add títulos
-            fig.update_layout(
-                title= {
-                    'text': "ÁREA DE RISCO X SEGURANÇA",
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'
-                },
-                barmode = 'overlay'
-            )
-
-            fig.show()
-
-            return fig
-
         elif Titulo == "3":
             Titulo = "Risco"
+            headerColor = 'red'
 
-            headerColor= 'crimson'
-            fig = make_subplots(
-            rows=1, cols=3,
-            specs= [[{"type": "table"},{"colspan": 2},None]]
-            )
+        fig = make_subplots(
+        rows=1, cols=3,
+        specs= [[{"type": "table"},{"colspan": 2},None]]
+        )
 
-            # Add Table
-            fig.add_trace(                   
-            go.Table(
-                header=dict(
-                    values=["Descrição do Gráfico"],
-                    font=dict(size=12),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[static_desc],
-                    line_color='darkslategray',
-                    align = "left")
+        fig.add_trace(                   
+        go.Table(
+            header=dict(
+                values=[["Descrição do Gráfico"],[Titulo]],
+                font=dict(size=12),
+                line_color='darkslategray',
+                fill=dict(color=['white',headerColor]),
+                align="left"
             ),
-            row=1, col=1
-            )
+            cells=dict(
+                values=[[static_desc],[analise]],
+                line_color='darkslategray',
+                fill=dict(color=['white',headerColor]),
+                align ="left"
+                )
+        ),
+        row=1, col=1
+        )
+            
+        #Add Segurança
+        fig.add_trace(
+        go.Bar(
+            y= data.CLASSE_SOCIAL,
+            x= -1* data.SEG,
+            orientation='h',
+            name='Áreas de Segurança',
+            customdata= pd.Series(["{0:.1f}%".format(val * 100) for val in data['SEG']], index = data.SEG),
+            hovertemplate= "Percentual de Área Segurança da Classe: %{customdata}",
+            marker_color=colors[1]
+            ), row=1, col=2
+        )
 
-            fig.add_trace(                   
-            go.Table(
-                  columnorder = [1,2],
-                  columnwidth = [80,400],
-                header=dict(
-                    values=[Titulo],
-                    font=dict(size=12),
-                    line_color='darkslategray',
-                    fill=dict(color=['red']),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[analise],
-                    line_color='darkslategray',
-                    fill=dict(color=['red']),
-                    align ="left"
-                    )
-            ),
-            row=1, col=1
-            )
-
-            #Add Segurança
-            fig.add_trace(
-            go.Bar(
-                y= data.CLASSE_SOCIAL,
-                x= -1* data.SEG,
-                orientation='h',
-                name='Áreas de Segurança',
-                customdata= pd.Series(["{0:.1f}%".format(val * 100) for val in data['SEG']], index = data.SEG),
-                hovertemplate= "Percentual de Área Segurança da Classe: %{customdata}",
-                marker_color=colors[1]
-                ), row=1, col=2
-            )
-
-            #Add Risco
-            fig.add_trace(
-            go.Bar(
-                y= data.CLASSE_SOCIAL,
-                x= data.RISCO,
-                orientation='h',
-                name='Áreas de Risco',
-                customdata= pd.Series(["{0:.1f}%".format(val * 100) for val in data['RISCO']], index = data.RISCO),
-                hovertemplate= "Percentual de Área Risco da Classe: %{customdata}",
-                marker_color=colors[3]
-                ), row=1, col=2
-            )
+        #Add Risco
+        fig.add_trace(
+        go.Bar(
+            y= data.CLASSE_SOCIAL,
+            x= data.RISCO,
+            orientation='h',
+            name='Áreas de Risco',
+            customdata= pd.Series(["{0:.1f}%".format(val * 100) for val in data['RISCO']], index = data.RISCO),
+            hovertemplate= "Percentual de Área Risco da Classe: %{customdata}",
+            marker_color=colors[3]
+            ), row=1, col=2
+        )
 
 
-            xaxisTickPre = list(np.arange(-1,+1,0.1))
+        xaxisTickPre = list(np.arange(-1,+1,0.1))
 
-            xaxisTick = []
+        xaxisTick = []
 
-            for num in xaxisTickPre:
-                xaxisTick.append(round(num/0.1,3)*0.1)
+        for num in xaxisTickPre:
+            xaxisTick.append(round(num/0.1,3)*0.1)
 
-            xaxisTickText = [abs(i) for i in xaxisTick]
+        xaxisTickText = [abs(i) for i in xaxisTick]
 
-            fig.update_xaxes(title_text="Percentual de Segurança x Percentual de Risco", row=1, col=2)
-            fig.update_xaxes(
-                tickvals= xaxisTick,
-                ticktext= ["{0:.2f}%".format(val * 100) for val in xaxisTickText],
-                row=1, col=2
-            )
-            fig.update_yaxes(title_text="Classe Social", row=1, col=2)
+        fig.update_xaxes(title_text="Percentual de Segurança x Percentual de Risco", row=1, col=2)
+        fig.update_xaxes(
+            tickvals= xaxisTick,
+            ticktext= ["{0:.2f}%".format(val * 100) for val in xaxisTickText],
+            row=1, col=2
+        )
+        fig.update_yaxes(title_text="Classe Social", row=1, col=2)
 
-            #Add títulos
-            fig.update_layout(
-                title= {
-                    'text': "ÁREA DE RISCO X SEGURANÇA",
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'
-                },
-                barmode = 'overlay'
-            )
+        #Add títulos
+        fig.update_layout(
+            title= {
+                'text': "ÁREA DE RISCO X SEGURANÇA",
+                'y':0.9,
+                'x':0.5,
+                'xanchor': 'center',
+                'yanchor': 'top'
+            },
+            barmode = 'overlay'
+        )
 
-            fig.show()
+        fig.show()
 
-            return fig
+        return fig
 
-    
     else:
         raise Exception ("Flag invalida, por favor digite yes ou no")
 

@@ -145,253 +145,83 @@ def Ks2(data,flag):
 
         pre_fig.show()
 
-        static_desc=static_desc
-        Titulo = str(input("Tipo da Descrição [1 - Oportunidade], [2 - Alerta], [3 - Risco]: "))
+        Titulo = "0"
+        while(Titulo != "1" and Titulo != "2" and Titulo != "3"):
+            Titulo = str(input("Tipo da Descrição [1 - Oportunidade], [2 - Alerta], [3 - Risco]: "))
+        
         analise = str(input("digite a descrição desejada: "))
 
-        # Fazendo os subplots para colocar a descrição e o gráfico na mesma imagem
         if Titulo == "1":
             Titulo = "Oportunidade"
-            fig = make_subplots(
-            rows=1, cols=3,
-            specs= [[{"type": "table"},{"colspan": 2},None]]
-            )
-
-            # Add Table
-            fig.add_trace(                   
-            go.Table(
-                header=dict(
-                    values=["Descrição do Gráfico"],
-                    font=dict(size=12),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[static_desc],
-                    line_color='darkslategray',
-                    align = "left")
-            ),
-            row=1, col=1
-            )
-
-            fig.add_trace(                   
-            go.Table(
-                  columnorder = [1,2],
-                  columnwidth = [80,400],
-                header=dict(
-                    values=[Titulo],
-                    font=dict(size=12),
-                    line_color='darkslategray',
-                    fill=dict(color=['lightgreen']),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[analise],
-                    line_color='darkslategray',
-                    fill=dict(color=['lightgreen']),
-                    align ="left"
-                    )
-            ),
-            row=1, col=1
-            )
-
-
-            
-            # Add linha de Bom
-            fig.add_trace(
-                go.Scatter(x=label, y=df.PercentualBomAcc, hovertemplate="%{x},%{y}" , name="Bom", marker_color=colors[0]), row=1,col=2
-            )
-
-            # Add linha de Mal
-            fig.add_trace(
-                go.Scatter(x=label, y=df.PercentualMalAcc, hovertemplate="%{x},%{y}" , name="Mal", marker_color=colors[1]), row=1, col=2
-            )
-
-            # Add linha de KS2
-            fig.add_trace(
-                go.Scatter(x=label, y=df.KS2, name="KS2", marker_color=colors[2]), row=1, col=2
-            )
-
-            fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
-            fig.update_yaxes(title_text="% População (AC)", row=1, col=2)
-            fig.update_yaxes(tickformat=".3%", row=1, col=2)
-
-            #Add Formatação do Gráfico
-            fig.update_layout(
-                title= {
-                    'text': "KS2",
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'
-                },
-            )
-
-            fig.show()
-
-            return fig
+            headerColor = 'lightgreen'
 
         elif Titulo == "2":
             Titulo = "Alerta"
-            fig = make_subplots(
-            rows=1, cols=3,
-            specs= [[{"type": "table"},{"colspan": 2},None]]
-            )
+            headerColor = 'yellow'
 
-            # Add Table
-            fig.add_trace(                   
-            go.Table(
-                header=dict(
-                    values=["Descrição do Gráfico"],
-                    font=dict(size=12),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[static_desc],
-                    line_color='darkslategray',
-                    align = "left")
-            ),
-            row=1, col=1
-            )
-
-            fig.add_trace(                   
-            go.Table(
-                  columnorder = [1,2],
-                  columnwidth = [80,400],
-                header=dict(
-                    values=[Titulo],
-                    font=dict(size=12),
-                    line_color='darkslategray',
-                    fill=dict(color=['yellow']),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[analise],
-                    line_color='darkslategray',
-                    fill=dict(color=['yellow']),
-                    align ="left"
-                    )
-            ),
-            row=1, col=1
-            )
-
-
-            
-            # Add linha de Bom
-            fig.add_trace(
-                go.Scatter(x=label, y=df.PercentualBomAcc, hovertemplate="%{x},%{y}" , name="Bom", marker_color=colors[0]), row=1,col=2
-            )
-
-            # Add linha de Mal
-            fig.add_trace(
-                go.Scatter(x=label, y=df.PercentualMalAcc, hovertemplate="%{x},%{y}" , name="Mal", marker_color=colors[1]), row=1, col=2
-            )
-
-            # Add linha de KS2
-            fig.add_trace(
-                go.Scatter(x=label, y=df.KS2, name="KS2", marker_color=colors[2]), row=1, col=2
-            )
-
-            fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
-            fig.update_yaxes(title_text="% População (AC)", row=1, col=2)
-            fig.update_yaxes(tickformat=".3%", row=1, col=2)
-
-            #Add Formatação do Gráfico
-            fig.update_layout(
-                title= {
-                    'text': "KS2",
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'
-                },
-            )
-
-            fig.show()
-
-            return fig
-
-        if Titulo == "3":
+        elif Titulo == "3":
             Titulo = "Risco"
-            fig = make_subplots(
-            rows=1, cols=3,
-            specs= [[{"type": "table"},{"colspan": 2},None]]
-            )
+            headerColor = 'red'
 
-            # Add Table
-            fig.add_trace(                   
-            go.Table(
-                header=dict(
-                    values=["Descrição do Gráfico"],
-                    font=dict(size=12),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[static_desc],
-                    line_color='darkslategray',
-                    align = "left")
+        fig = make_subplots(
+        rows=1, cols=3,
+        specs= [[{"type": "table"},{"colspan": 2},None]]
+        )
+
+        fig.add_trace(                   
+        go.Table(
+            header=dict(
+                values=[["Descrição do Gráfico"],[Titulo]],
+                font=dict(size=12),
+                line_color='darkslategray',
+                fill=dict(color=['white',headerColor]),
+                align="left"
             ),
-            row=1, col=1
-            )
-
-            fig.add_trace(                   
-            go.Table(
-                  columnorder = [1,2],
-                  columnwidth = [80,400],
-                header=dict(
-                    values=[Titulo],
-                    font=dict(size=12),
-                    line_color='darkslategray',
-                    fill=dict(color=['red']),
-                    align="left"
-                ),
-                cells=dict(
-                    values=[analise],
-                    line_color='darkslategray',
-                    fill=dict(color=['red']),
-                    align ="left"
-                    )
-            ),
-            row=1, col=1
-            )
-
-
+            cells=dict(
+                values=[[static_desc],[analise]],
+                line_color='darkslategray',
+                fill=dict(color=['white',headerColor]),
+                align ="left"
+                )
+        ),
+        row=1, col=1
+        )
             
-            # Add linha de Bom
-            fig.add_trace(
-                go.Scatter(x=label, y=df.PercentualBomAcc, hovertemplate="%{x},%{y}" , name="Bom", marker_color=colors[0]), row=1,col=2
-            )
+        # Add linha de Bom
+        fig.add_trace(
+            go.Scatter(x=label, y=df.PercentualBomAcc, hovertemplate="%{x},%{y}" , name="Bom", marker_color=colors[0]), row=1,col=2
+        )
 
-            # Add linha de Mal
-            fig.add_trace(
-                go.Scatter(x=label, y=df.PercentualMalAcc, hovertemplate="%{x},%{y}" , name="Mal", marker_color=colors[1]), row=1, col=2
-            )
+        # Add linha de Mal
+        fig.add_trace(
+            go.Scatter(x=label, y=df.PercentualMalAcc, hovertemplate="%{x},%{y}" , name="Mal", marker_color=colors[1]), row=1, col=2
+        )
 
-            # Add linha de KS2
-            fig.add_trace(
-                go.Scatter(x=label, y=df.KS2, name="KS2", marker_color=colors[2]), row=1, col=2
-            )
+        # Add linha de KS2
+        fig.add_trace(
+            go.Scatter(x=label, y=df.KS2, name="KS2", marker_color=colors[2]), row=1, col=2
+        )
 
-            fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
-            fig.update_yaxes(title_text="% População (AC)", row=1, col=2)
-            fig.update_yaxes(tickformat=".3%", row=1, col=2)
+        fig.update_xaxes(title_text="Faixa de Score", row=1, col=2)
+        fig.update_yaxes(title_text="% População (AC)", row=1, col=2)
+        fig.update_yaxes(tickformat=".3%", row=1, col=2)
 
-            #Add Formatação do Gráfico
-            fig.update_layout(
-                title= {
-                    'text': "KS2",
-                    'y':0.9,
-                    'x':0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top'
-                },
-            )
+        #Add Formatação do Gráfico
+        fig.update_layout(
+            title= {
+                'text': "KS2",
+                'y':0.9,
+                'x':0.5,
+                'xanchor': 'center',
+                'yanchor': 'top'
+            },
+        )
 
-            fig.show()
+        fig.show()
 
-            return fig
+        return fig
 
-        
-    
+
     else:
         raise Exception(" Flag invalida, por favor digite 'YES' ou 'NO' ")
         
