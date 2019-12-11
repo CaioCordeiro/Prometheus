@@ -131,20 +131,38 @@ def AlvoFaixaScore(data, casasDecimais, flag):
             )
 
             # Add Table
-            fig.add_trace(
+            fig.add_trace(                   
             go.Table(
                 header=dict(
-                    values=[Titulo],
-                    line_color='darkslategray',
-                    fill_color=headerColor,
-                    font=dict(size=10),
+                    values=["Descrição do Gráfico"],
+                    font=dict(size=12),
                     align="left"
                 ),
                 cells=dict(
-                    values=[[static_desc,analise]],
-                    line_color='lightgreen',
-                    fill_color=headerColor,
+                    values=[static_desc],
+                    line_color='darkslategray',
                     align = "left")
+            ),
+            row=1, col=1
+            )
+
+            fig.add_trace(                   
+            go.Table(
+                  columnorder = [1,2],
+                  columnwidth = [80,400],
+                header=dict(
+                    values=[Titulo],
+                    font=dict(size=12),
+                    line_color='darkslategray',
+                    fill=dict(color=['lightgreen']),
+                    align="left"
+                ),
+                cells=dict(
+                    values=[analise],
+                    line_color='darkslategray',
+                    fill=dict(color=['lightgreen']),
+                    align ="left"
+                    )
             ),
             row=1, col=1
             )
@@ -191,20 +209,38 @@ def AlvoFaixaScore(data, casasDecimais, flag):
             )
 
             # Add Table
-            fig.add_trace(
+            fig.add_trace(                   
             go.Table(
                 header=dict(
-                    values=[Titulo],
-                    line_color='yellow',
-                    fill_color=headerColor,
-                    font=dict(size=10),
+                    values=["Descrição do Gráfico"],
+                    font=dict(size=12),
                     align="left"
                 ),
                 cells=dict(
-                    values=[[static_desc,analise]],
-                    line_color='yellow',
-                    fill_color=headerColor,
+                    values=[static_desc],
+                    line_color='darkslategray',
                     align = "left")
+            ),
+            row=1, col=1
+            )
+
+            fig.add_trace(                   
+            go.Table(
+                  columnorder = [1,2],
+                  columnwidth = [80,400],
+                header=dict(
+                    values=[Titulo],
+                    font=dict(size=12),
+                    line_color='darkslategray',
+                    fill=dict(color=['yellow']),
+                    align="left"
+                ),
+                cells=dict(
+                    values=[analise],
+                    line_color='darkslategray',
+                    fill=dict(color=['yellow']),
+                    align ="left"
+                    )
             ),
             row=1, col=1
             )
@@ -245,27 +281,43 @@ def AlvoFaixaScore(data, casasDecimais, flag):
         elif Titulo == "3":
             Titulo = "Risco"
 
-            headerColor= 'crimson'
             fig = make_subplots(
             rows=1, cols=3,
             specs= [[{"type": "table"},{"colspan": 2},None]]
             )
 
-            # Add Table
-            fig.add_trace(
+            fig.add_trace(                   
             go.Table(
                 header=dict(
-                    values=[Titulo],
-                    font=dict(size=10),
-                    line_color='red',
-                    fill_color=headerColor,
+                    values=["Descrição do Gráfico"],
+                    font=dict(size=12),
                     align="left"
                 ),
                 cells=dict(
-                    values=[[static_desc,analise]],
-                    line_color='red',
-                    fill_color=headerColor,
+                    values=[static_desc],
+                    line_color='darkslategray',
                     align = "left")
+            ),
+            row=1, col=1
+            )
+
+            fig.add_trace(                   
+            go.Table(
+                  columnorder = [1,2],
+                  columnwidth = [80,400],
+                header=dict(
+                    values=[Titulo],
+                    font=dict(size=12),
+                    line_color='darkslategray',
+                    fill=dict(color=['red']),
+                    align="left"
+                ),
+                cells=dict(
+                    values=[analise],
+                    line_color='darkslategray',
+                    fill=dict(color=['red']),
+                    align ="left"
+                    )
             ),
             row=1, col=1
             )
