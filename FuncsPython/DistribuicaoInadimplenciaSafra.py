@@ -73,30 +73,15 @@ def distInadimplenciaScore(data, flag):
     if flag == "yes":
 
         pre_fig = make_subplots(
-        rows=1, cols=3,
-        specs= [[{"type": "table"},{"secondary_y": True,"colspan": 2},None]]
-        )
-
-        # Add Table
-        pre_fig.add_trace(
-        go.Table(
-            header=dict(
-                values=["Descrição"],
-                font=dict(size=10),
-                align="left"
-            ),
-            cells=dict(
-                values=[static_desc],
-                align = "left")
-        ),
-        row=1, col=1
+        rows=1, cols=2,
+        specs= [[{"secondary_y": True,"colspan": 2},None]]
         )
 
         #Add bar chart
         pre_fig.add_trace(
             go.Bar(x=data.MES_ANO, y=data.SAFRA,
             customdata= pd.Series(["{0:.2f}%".format(val * 100) for val in data['SAFRA']], index = data.SAFRA),
-            marker_color=colors[0], name="Safra"), secondary_y = False, row=1, col=2
+            marker_color=colors[0], name="Safra"), secondary_y = False, row=1, col=1
         )
 
         #Add line chart
@@ -104,14 +89,14 @@ def distInadimplenciaScore(data, flag):
             go.Scatter(x=data.MES_ANO, y=data.TAXA_INADIMPLENCIA,
             customdata= pd.Series(["{0:.2f}%".format(val * 100) for val in data['TAXA_INADIMPLENCIA']], index = data.TAXA_INADIMPLENCIA),
             hovertemplate = "Taxa de Inadimplência no período: %{customdata}",
-            marker_color=colors[1], name="Taxa de Inadimplência"), secondary_y = True, row=1, col=2
+            marker_color=colors[1], name="Taxa de Inadimplência"), secondary_y = True, row=1, col=1
         )
 
         pre_fig.update_xaxes(title_text="Período", row=1, col=2)
 
         # Double Y Axis
-        pre_fig.update_yaxes(tickformat=".2%",title_text="Safra", secondary_y = False, row=1, col=2)
-        pre_fig.update_yaxes(tickformat=".2%",title_text="Taxa de Inadimplência", secondary_y = True, row=1, col=2)
+        pre_fig.update_yaxes(tickformat=".2%",title_text="Safra", secondary_y = False, row=1, col=1)
+        pre_fig.update_yaxes(tickformat=".2%",title_text="Taxa de Inadimplência", secondary_y = True, row=1, col=1)
 
         #Add títulos
         pre_fig.update_layout(
@@ -149,7 +134,8 @@ def distInadimplenciaScore(data, flag):
         specs= [[{"type": "table"},{"secondary_y": True,"colspan": 2},None]]
         )
 
-        fig.add_trace(                   
+        # Add Table
+        fig.add_trace(
         go.Table(
             header=dict(
                 values=[["Descrição do Gráfico"],[Titulo]],
@@ -166,11 +152,6 @@ def distInadimplenciaScore(data, flag):
                 )
         ),
         row=1, col=1
-        )
-
-        fig = make_subplots(
-        rows=1, cols=3,
-        specs= [[{"type": "table"},{"secondary_y": True,"colspan": 2},None]]
         )
 
         #Add bar chart
